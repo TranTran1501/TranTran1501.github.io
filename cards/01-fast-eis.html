@@ -1,0 +1,187 @@
+<!-- ---------- 0a. Fast EIS / PRBS ---------- -->
+<article class="card">
+  <h3>
+    <span class="L" lang="en">Fast impedance spectroscopy by PRBS excitation and wavelet transform</span>
+    <span class="L" lang="ko">PRBS 여기와 웨이블릿 변환을 이용한 고속 임피던스 분광법</span>
+    <span class="L" lang="vi">Phổ trở kháng nhanh bằng kích thích PRBS và biến đổi wavelet</span>
+  </h3>
+  <p>
+    <span class="L" lang="en">Cylindrical Li-ion cells excited with a pseudo-random binary sequence instead of a stepped sine sweep; the impedance is reconstructed from the voltage–current transient by a continuous Morse wavelet transform. Keysight N6705C with an N6781A two-quadrant SMU, driven from Python over SCPI, with the Jožef Stefan Institute, Slovenia. Method after G. Nusev et al., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+    <span class="L" lang="ko">단계적 정현파 대신 의사난수 이진 신호(PRBS)를 인가하고, 전압–전류 과도응답에서 연속 Morse 웨이블릿 변환으로 임피던스를 복원. Keysight N6705C와 N6781A 2사분면 SMU를 Python/SCPI로 제어. 슬로베니아 Jožef Stefan Institute와 공동 수행, 기법은 G. Nusev et al., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+    <span class="L" lang="vi">Pin Li-ion hình trụ kích thích bằng chuỗi nhị phân giả ngẫu nhiên thay cho quét sin từng bước; trở kháng tái dựng từ quá độ điện áp–dòng điện bằng biến đổi wavelet Morse liên tục. Keysight N6705C với SMU hai góc phần tư N6781A, điều khiển bằng Python qua SCPI, hợp tác với Viện Jožef Stefan, Slovenia. Phương pháp theo G. Nusev và cs., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+  </p>
+
+  <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+  <figure class="fig">
+    <figcaption class="fig-title">
+      <span class="L" lang="en">From a 20-minute PRBS record to a full impedance spectrum</span>
+      <span class="L" lang="ko">20분 PRBS 측정에서 전체 임피던스 스펙트럼까지</span>
+      <span class="L" lang="vi">Từ bản ghi PRBS 20 phút đến phổ trở kháng đầy đủ</span>
+    </figcaption>
+
+    <div class="fig-flow">
+
+      <!-- 1. PRBS -->
+      <div class="fig-step">
+        <div class="fig-media">
+        <svg viewBox="0 0 200 92" role="img" aria-label="PRBS excitation waveform">
+          <line x1="6" y1="46" x2="194" y2="46" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+          <path d="M8 66 H26 V26 H40 V66 H58 V26 H72 V66 H104 V26 H118 V66 H132 V26 H160 V66 H176 V26 H192"
+                fill="none" stroke="var(--imag)" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        </div>
+        <h4>
+          <span class="L" lang="en">PRBS excitation</span>
+          <span class="L" lang="ko">PRBS 여기</span>
+          <span class="L" lang="vi">Kích thích PRBS</span>
+        </h4>
+        <span class="sub">f<sub>B</sub> = 0.1 Hz · 20 min ·
+          <span class="L" lang="en">small signal</span>
+          <span class="L" lang="ko">소신호</span>
+          <span class="L" lang="vi">tín hiệu nhỏ</span>
+        </span>
+      </div>
+
+      <!-- 2. V–I transient -->
+      <div class="fig-step">
+        <div class="fig-media">
+        <svg viewBox="0 0 200 92" role="img" aria-label="Synchronous voltage and current transients">
+          <path d="M8 30 C20 24 26 38 34 32 C44 25 52 42 62 34 C74 26 82 42 94 33 C106 25 116 41 128 32 C140 24 150 40 162 31 C174 24 184 34 192 29"
+                fill="none" stroke="var(--real)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 80 H26 V62 H40 V80 H58 V62 H72 V80 H104 V62 H118 V80 H132 V62 H160 V80 H176 V62 H192"
+                fill="none" stroke="var(--imag)" stroke-width="1.6" stroke-linejoin="round"/>
+          <text x="8" y="16" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--real)">V(t)</text>
+          <text x="8" y="56" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--imag)">I(t)</text>
+        </svg>
+        </div>
+        <h4>
+          <span class="L" lang="en">Synchronous V–I transient</span>
+          <span class="L" lang="ko">전압–전류 동기 측정</span>
+          <span class="L" lang="vi">Quá độ V–I đồng bộ</span>
+        </h4>
+        <span class="sub">N6705C + N6781A · Python / SCPI</span>
+      </div>
+
+      <!-- 3. CWT scalogram + Z(w) -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-fasteis-scalogram.png" alt="Continuous wavelet transform scalogram with the reconstructed impedance">
+        </div>
+        <h4>
+          <span class="L" lang="en">Continuous wavelet transform</span>
+          <span class="L" lang="ko">연속 웨이블릿 변환</span>
+          <span class="L" lang="vi">Biến đổi wavelet liên tục</span>
+        </h4>
+        <span class="sub">8.9 kHz → 0.89 mHz</span>
+      </div>
+
+      <!-- 4. Kramers-Kronig check -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-fasteis-kk.png" alt="Nyquist plot: measured spectrum against the Kramers-Kronig fit">
+        </div>
+        <h4>
+          <span class="L" lang="en">Kramers–Kronig validation</span>
+          <span class="L" lang="ko">Kramers–Kronig 검증</span>
+          <span class="L" lang="vi">Kiểm tra Kramers–Kronig</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">measured vs KK fit</span>
+          <span class="L" lang="ko">측정값 vs KK 피팅</span>
+          <span class="L" lang="vi">đo vs khớp KK</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- con số chính ---- -->
+    <div class="fig-stats">
+      <div class="fig-stat">
+        <b>0.89 mHz</b>
+        <span class="cap">
+          <span class="L" lang="en">from a single 20-minute record</span>
+          <span class="L" lang="ko">단일 20분 측정으로 도달</span>
+          <span class="L" lang="vi">từ một bản ghi 20 phút</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>23 m 55 s</b>
+        <span class="cap">
+          <span class="L" lang="en">full spectrum, against 1 h 37 m with the 0.01 Hz segment</span>
+          <span class="L" lang="ko">전체 스펙트럼 (0.01 Hz 구간 포함 시 1시간 37분)</span>
+          <span class="L" lang="vi">toàn phổ, so với 1 h 37 m nếu đo đoạn 0,01 Hz</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>&lt; 5 %</b>
+        <span class="cap">
+          <span class="L" lang="en">KK residuals over most of the range</span>
+          <span class="L" lang="ko">대부분 구간에서 KK 잔차</span>
+          <span class="L" lang="vi">sai số KK trên phần lớn dải tần</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>13 T &middot; 18 SOC</b>
+        <span class="cap">
+          <span class="L" lang="en">11–40 °C and 2.5–4.2 V in 0.1 V steps</span>
+          <span class="L" lang="ko">11–40 °C, 2.5–4.2 V (0.1 V 간격)</span>
+          <span class="L" lang="vi">11–40 °C và 2,5–4,2 V (bước 0,1 V)</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- lịch đo ---- -->
+    <div class="fig-sched">
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">With the 0.01 Hz segment</span>
+            <span class="L" lang="ko">0.01 Hz 구간 포함</span>
+            <span class="L" lang="vi">Có đo đoạn 0,01 Hz</span>
+          </span>
+          <span class="t">1 h 37 m</span>
+        </div>
+        <div class="fig-bar">
+          <i style="flex:0 0 85.71%"></i><i style="flex:0 0 10.28%"></i><i style="flex:0 0 3.43%"></i>
+          <i style="flex:0 0 0.51%"></i><i style="flex:0 0 0.05%"></i><i style="flex:0 0 0.02%"></i>
+        </div>
+        <p class="fig-key">0.01 Hz 5000 s · 0.1 Hz 600 s · 1 Hz 200 s · 10 Hz 30 s · 100 Hz 3 s · 1 kHz 1 s</p>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">From 0.1 Hz, low frequencies recovered by the wavelet</span>
+            <span class="L" lang="ko">0.1 Hz부터 시작, 저주파는 웨이블릿으로 복원</span>
+            <span class="L" lang="vi">Từ 0,1 Hz, vùng tần thấp phục hồi bằng wavelet</span>
+          </span>
+          <span class="t">23 m 55 s</span>
+        </div>
+        <div class="fig-bar is-fast">
+          <i style="flex:0 0 20.57%"></i><i style="flex:0 0 3.43%"></i><i style="flex:0 0 0.51%"></i>
+          <i style="flex:0 0 0.05%"></i><i style="flex:0 0 0.02%"></i>
+        </div>
+        <p class="fig-key">0.1 Hz 1200 s · 1 Hz 200 s · 10 Hz 30 s · 100 Hz 3 s · 1 kHz 1 s</p>
+      </div>
+    </div>
+  </figure>
+  <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+  <div class="result">
+    <strong>
+      <span class="L" lang="en">Conclusion.</span>
+      <span class="L" lang="ko">결론.</span>
+      <span class="L" lang="vi">Kết luận.</span>
+    </strong>
+    <span class="L" lang="en">A 20-minute record at 0.1 Hz reaches 0.89 mHz, so a full spectrum takes about 24 minutes instead of more than 1.5 hours. The ohmic, charge-transfer and diffusion features match classical EIS, with Kramers–Kronig residuals below 5 % over most of the range. Temperature and SOC series run unattended, each acquisition triggered at dE/dt ≤ 3 mV.</span>
+    <span class="L" lang="ko">0.1 Hz에서 20분 측정으로 0.89 mHz까지 도달, 1.5시간 이상 대신 약 24분 만에 전체 스펙트럼을 확보. 옴 저항·전하전달·확산 거동은 고전적 EIS와 일치하며 Kramers–Kronig 잔차는 대부분 구간에서 5 % 이하. 온도 및 SOC 시리즈는 dE/dt ≤ 3 mV 기준으로 무인 자동 실행.</span>
+    <span class="L" lang="vi">Bản ghi 20 phút ở 0,1 Hz đạt tới 0,89 mHz, thu toàn phổ trong khoảng 24 phút thay vì hơn 1,5 giờ. Các đặc trưng ohmic, chuyển điện tích và khuếch tán trùng khớp EIS cổ điển, sai số Kramers–Kronig dưới 5 % trên phần lớn dải. Chuỗi đo theo nhiệt độ và SOC chạy tự động, kích hoạt theo tiêu chí dE/dt ≤ 3 mV.</span>
+  </div>
+
+  <div class="tags">
+    <span class="tag">PRBS</span>
+    <span class="tag">Morse wavelet</span>
+    <span class="tag">Python / SCPI</span>
+    <span class="tag">Keysight N6705C</span>
+    <span class="tag">GRC Batteries 2026</span>
+  </div>
+</article>

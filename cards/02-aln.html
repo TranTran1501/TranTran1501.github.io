@@ -1,0 +1,228 @@
+<!-- ---------- 0b. AlN ---------- -->
+<article class="card">
+  <h3>
+    <span class="L" lang="en">Wide-temperature impedance characterization of AlN ceramics</span>
+    <span class="L" lang="ko">AlN 세라믹의 광온도역 임피던스 특성 평가</span>
+    <span class="L" lang="vi">Phân tích trở kháng gốm AlN trên dải nhiệt độ rộng</span>
+  </h3>
+  <p>
+    <span class="L" lang="en">AlN is the heater substrate and electrostatic chuck material in semiconductor CVD equipment, where it should insulate — yet it conducts at process temperature. Industrial disks with two proprietary dopants, here A and B, were measured from 30 to 900 °C over 10 mHz–10 MHz under dry air, 500 ppm H<sub>2</sub>O air, nitrogen and vacuum.</span>
+    <span class="L" lang="ko">AlN은 반도체 CVD 장비의 히터 기판 및 정전척 소재로, 절연체로 기대되지만 공정 온도에서는 전도성을 보입니다. 두 종류의 도판트(A, B로 표기)를 포함한 산업용 시료를 30–900 °C, 10 mHz–10 MHz 범위에서 건조 공기, 500 ppm H<sub>2</sub>O 공기, 질소, 진공 분위기에서 측정.</span>
+    <span class="L" lang="vi">AlN được dùng làm đế lò gia nhiệt và chuck tĩnh điện trong thiết bị CVD bán dẫn — vốn cần cách điện, nhưng lại dẫn ở nhiệt độ vận hành. Các đĩa gốm công nghiệp chứa hai loại dopant, ở đây gọi là A và B, được đo từ 30 đến 900 °C, dải 10 mHz–10 MHz, trong không khí khô, không khí 500 ppm H<sub>2</sub>O, nitơ và chân không.</span>
+  </p>
+
+  <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+  <figure class="fig">
+    <figcaption class="fig-title">
+      <span class="L" lang="en">Reading the shorting path out of a frequency-resolved Arrhenius plot</span>
+      <span class="L" lang="ko">주파수별 Arrhenius 분석으로 단락 경로를 분리하기</span>
+      <span class="L" lang="vi">Tách đường ngắn mạch từ biểu đồ Arrhenius phân giải theo tần số</span>
+    </figcaption>
+
+    <div class="fig-flow">
+
+      <!-- 1. Sample set -->
+      <div class="fig-step">
+        <div class="fig-media">
+        <svg viewBox="0 0 200 92" role="img" aria-label="Two doped AlN disks with sputtered electrodes">
+          <g>
+            <rect x="22" y="34" width="62" height="6" fill="var(--imag)"/>
+            <rect x="22" y="40" width="62" height="16" fill="#E7E2DA" stroke="var(--line)"/>
+            <rect x="22" y="56" width="62" height="6" fill="var(--imag)"/>
+            <line x1="12" y1="37" x2="22" y2="37" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <line x1="12" y1="59" x2="22" y2="59" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <text x="53" y="80" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink)" text-anchor="middle">A</text>
+          </g>
+          <g>
+            <rect x="116" y="34" width="62" height="6" fill="var(--imag)"/>
+            <rect x="116" y="40" width="62" height="16" fill="#CFC8BE" stroke="var(--line)"/>
+            <rect x="116" y="56" width="62" height="6" fill="var(--imag)"/>
+            <line x1="106" y1="37" x2="116" y2="37" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <line x1="106" y1="59" x2="116" y2="59" stroke="var(--ink-soft)" stroke-width="1.4"/>
+            <text x="147" y="80" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink)" text-anchor="middle">B</text>
+          </g>
+          <text x="100" y="20" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-soft)" text-anchor="middle">Ø5 mm disks</text>
+        </svg>
+        </div>
+        <h4>
+          <span class="L" lang="en">Two dopant systems</span>
+          <span class="L" lang="ko">두 가지 도판트 계</span>
+          <span class="L" lang="vi">Hai hệ dopant</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">Ag and sputtered Mo/Au electrodes</span>
+          <span class="L" lang="ko">Ag · 스퍼터 Mo/Au 전극</span>
+          <span class="L" lang="vi">điện cực Ag và Mo/Au phún xạ</span>
+        </span>
+      </div>
+
+      <!-- 2. Atmosphere and temperature -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-aln-humidity.png" alt="Temperature ramp with inlet and outlet humidity recorded through one cycle">
+        </div>
+        <h4>
+          <span class="L" lang="en">Atmosphere &amp; temperature control</span>
+          <span class="L" lang="ko">분위기·온도 제어</span>
+          <span class="L" lang="vi">Kiểm soát khí quyển &amp; nhiệt độ</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">inlet vs outlet H<sub>2</sub>O · 30–900 °C</span>
+          <span class="L" lang="ko">유입·유출 H<sub>2</sub>O · 30–900 °C</span>
+          <span class="L" lang="vi">H<sub>2</sub>O vào–ra · 30–900 °C</span>
+        </span>
+      </div>
+
+      <!-- 3. Impedance mapping -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-aln-admittance.png" alt="Admittance spectra versus frequency, coloured by temperature">
+        </div>
+        <h4>
+          <span class="L" lang="en">Impedance mapping</span>
+          <span class="L" lang="ko">임피던스 매핑</span>
+          <span class="L" lang="vi">Lập bản đồ trở kháng</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">10 mHz–10 MHz · colour = temperature</span>
+          <span class="L" lang="ko">10 mHz–10 MHz · 색 = 온도</span>
+          <span class="L" lang="vi">10 mHz–10 MHz · màu = nhiệt độ</span>
+        </span>
+      </div>
+
+      <!-- 4. Arrhenius (dữ liệu thật) -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-aln-arrhenius.png" alt="Arrhenius plots before and after the shorting behaviour develops">
+        </div>
+        <h4>
+          <span class="L" lang="en">Arrhenius behaviour</span>
+          <span class="L" lang="ko">Arrhenius 거동</span>
+          <span class="L" lang="vi">Hành vi Arrhenius</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">colour = frequency</span>
+          <span class="L" lang="ko">색 = 주파수</span>
+          <span class="L" lang="vi">màu = tần số</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- con số chính ---- -->
+    <div class="fig-stats">
+      <div class="fig-stat">
+        <b>30–900 °C</b>
+        <span class="cap">
+          <span class="L" lang="en">dry air, 500 ppm H<sub>2</sub>O, nitrogen and vacuum</span>
+          <span class="L" lang="ko">건조 공기, 500 ppm H<sub>2</sub>O, 질소, 진공</span>
+          <span class="L" lang="vi">không khí khô, 500 ppm H<sub>2</sub>O, nitơ và chân không</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>10 mHz – 10 MHz</b>
+        <span class="cap">
+          <span class="L" lang="en">Z, C and Y on the same specimen</span>
+          <span class="L" lang="ko">동일 시료에서 Z, C, Y 동시 분석</span>
+          <span class="L" lang="vi">Z, C và Y trên cùng một mẫu</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>10 <span class="L" lang="en">cycles</span><span class="L" lang="ko">사이클</span><span class="L" lang="vi">chu kỳ</span></b>
+        <span class="cap">
+          <span class="L" lang="en">the shorting survives, and returns months later</span>
+          <span class="L" lang="ko">단락 거동이 지속되고 수개월 뒤 재현</span>
+          <span class="L" lang="vi">ngắn mạch vẫn tồn tại và trở lại sau vài tháng</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>5×10⁻⁴ hPa</b>
+        <span class="cap">
+          <span class="L" lang="en">vacuum stage removes the atmosphere as a variable</span>
+          <span class="L" lang="ko">분위기 변수를 제거하는 진공 스테이지</span>
+          <span class="L" lang="vi">buồng chân không loại bỏ ảnh hưởng khí quyển</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- ba bằng chứng ---- -->
+    <div class="fig-sched">
+      <div class="fig-title" style="margin:0 0 10px">
+        <span class="L" lang="en">Three observations that name it a surface path</span>
+        <span class="L" lang="ko">표면 경로임을 말해주는 세 가지 관찰</span>
+        <span class="L" lang="vi">Ba quan sát cho thấy đây là đường dẫn bề mặt</span>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">Impedance shifts between runs, capacitance spectra do not</span>
+            <span class="L" lang="ko">임피던스는 측정마다 변하지만 커패시턴스는 그대로</span>
+            <span class="L" lang="vi">Trở kháng đổi giữa các lần đo, phổ điện dung thì không</span>
+          </span>
+          <span class="t">
+            <span class="L" lang="en">parallel path</span>
+            <span class="L" lang="ko">병렬 경로</span>
+            <span class="L" lang="vi">đường song song</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">Only the low-frequency Arrhenius branches move</span>
+            <span class="L" lang="ko">저주파 Arrhenius 거동만 이동</span>
+            <span class="L" lang="vi">Chỉ nhánh Arrhenius tần số thấp dịch chuyển</span>
+          </span>
+          <span class="t">
+            <span class="L" lang="en">not the bulk</span>
+            <span class="L" lang="ko">벌크 아님</span>
+            <span class="L" lang="vi">không phải bulk</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">Outlet humidity stays above the inlet through every cycle</span>
+            <span class="L" lang="ko">모든 사이클에서 유출 습도가 유입 습도보다 높게 유지</span>
+            <span class="L" lang="vi">Độ ẩm đầu ra luôn cao hơn đầu vào qua mọi chu kỳ</span>
+          </span>
+          <span class="t">
+            <span class="L" lang="en">surface reaction</span>
+            <span class="L" lang="ko">표면 반응</span>
+            <span class="L" lang="vi">phản ứng bề mặt</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+  <div class="result">
+    <strong>
+      <span class="L" lang="en">Conclusion.</span>
+      <span class="L" lang="ko">결론.</span>
+      <span class="L" lang="vi">Kết luận.</span>
+    </strong>
+    <span class="L" lang="en">Plotted as log σT against 1000/T with frequency as the colour axis, the response splits in two: high-frequency branches following an activation energy specific to each dopant, and a low-frequency branch common to every sample that runs in parallel with the ceramic — a shorting behaviour driven by surface reaction, not an intrinsic property. It survives about ten thermal cycles and returns months later, so separating it took Mo/Au electrodes in vacuum and real-time inlet–outlet humidity monitoring.</span>
+    <span class="L" lang="ko">log σT를 1000/T에 대해 주파수를 색으로 표현하면 응답이 두 계열로 나뉩니다. 고주파 거동은 도판트별 고유의 활성화 에너지를 따르고, 저주파 거동은 조성과 무관하게 모든 시료에서 나타나며 세라믹과 병렬로 흐릅니다. 재료 본연의 성질이 아니라 표면 반응에 의한 단락 거동입니다. 약 10회의 열 사이클 동안 지속되고 수개월 뒤에도 재현되어, 분리하려면 진공에서의 Mo/Au 전극과 유입·유출 습도 실시간 모니터링이 필요했습니다.</span>
+    <span class="L" lang="vi">Vẽ log σT theo 1000/T với màu là tần số, đáp ứng tách thành hai họ: các nhánh tần số cao đi theo năng lượng hoạt hoá riêng của từng dopant, và một nhánh tần số thấp chung cho mọi mẫu, chạy song song với gốm — là ngắn mạch do phản ứng bề mặt, không phải tính chất nội tại. Nó tồn tại qua khoảng mười chu kỳ nhiệt và trở lại sau vài tháng, nên để tách được cần điện cực Mo/Au trong chân không và giám sát độ ẩm vào–ra theo thời gian thực.</span>
+  </div>
+
+  <div class="tags">
+    <span class="tag">AlN</span>
+    <span class="tag">semiconductor CVD</span>
+    <span class="tag">30–900 °C</span>
+    <span class="tag">controlled atmosphere</span>
+    <span class="tag">Arrhenius mapping</span>
+    <span class="tag">Samsung Electronics</span>
+    <span class="tag">GCIM 2023</span>
+    <span class="locked">
+      <span class="L" lang="en">industrial data restricted</span>
+      <span class="L" lang="ko">산업 데이터 비공개</span>
+      <span class="L" lang="vi">dữ liệu công nghiệp hạn chế</span>
+    </span>
+  </div>
+</article>

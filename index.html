@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tran Thi Huyen Tran — Impedance Spectroscopy</title>
+<meta name="description" content="Research portfolio: impedance spectroscopy, physics-based modelling, measurement automation, fast impedance spectroscopy, bioimpedance.">
+<!-- Icon hiện trên tab trình duyệt. Nhúng thẳng vào file, không cần file ảnh riêng. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%2312232E"/><g stroke="%233FA9A4" stroke-width="1.8" stroke-linecap="round"><line x1="9" y1="22" x2="16.5" y2="10"/><line x1="16.5" y1="10" x2="24" y2="20"/><line x1="9" y1="22" x2="24" y2="20"/></g><circle cx="9" cy="22" r="3.1" fill="%233FA9A4"/><circle cx="24" cy="20" r="3.1" fill="%233FA9A4"/><circle cx="16.5" cy="10" r="3.4" fill="%23E0913A"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EF;      /* nền be nhạt */
+  --ink:#1A2B33;        /* chữ chính */
+  --ink-soft:#5A6167;   /* chữ phụ */
+  --line:#DED9D1;       /* đường kẻ */
+  --real:#0E6E6B;       /* teal — trục thực */
+  --imag:#C1741A;       /* ochre — trục ảo */
+  --card:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans","IBM Plex Sans KR",system-ui,sans-serif; font-size:17px; line-height:1.65;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;line-height:1.15;margin:0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--imag)}
+
+/* ===================================================================
+   PHẦN ĐỔI NGÔN NGỮ
+   Mọi đoạn chữ dịch được bọc trong <span class="L" lang="en"> ...
+   CSS bên dưới ẩn hết, chỉ hiện ngôn ngữ đang được chọn.
+   =================================================================== */
+.L{display:none}
+html[data-lang="en"] .L[lang="en"],
+html[data-lang="ko"] .L[lang="ko"],
+html[data-lang="vi"] .L[lang="vi"]{display:inline}
+
+.langbar{display:flex;justify-content:flex-end;gap:6px;padding:18px 0 0}
+.langbar button{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;
+  background:none;border:1px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:6px 13px;cursor:pointer;transition:.15s;
+}
+.langbar button:hover{border-color:var(--ink);color:var(--ink)}
+.langbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.langbar button:focus-visible{outline:2px solid var(--imag);outline-offset:3px}
+
+/* ---------- HERO ---------- */
+header{padding:26px 0 56px;border-bottom:1px solid var(--line)}
+.intro{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.intro > div{flex:1 1 320px}
+.portrait{
+  width:150px;height:150px;object-fit:cover;flex:none;
+  border:1px solid var(--line);border-radius:50%;margin-top:6px;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+@media(max-width:560px){.portrait{width:112px;height:112px}}
+h1{font-size:clamp(34px,7vw,58px);font-weight:700;letter-spacing:-.02em;margin:10px 0 14px}
+.tagline{font-size:clamp(16px,2.2vw,19px);color:var(--ink-soft);max-width:36em}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;margin-top:34px}
+@media(min-width:760px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+.plot{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:12px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--ink);border-radius:999px;padding:9px 17px;transition:.18s;
+}
+.links a:hover{background:var(--ink);color:var(--paper)}
+.links a:focus-visible{outline:2px solid var(--imag);outline-offset:3px}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-soft);margin:16px 0 0}
+
+/* ---------- SECTIONS ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(24px,4vw,32px);margin:8px 0 28px}
+.lead{font-size:17.5px;color:var(--ink-soft);max-width:44em;margin:0 0 30px}
+.focus{display:grid;gap:26px 32px;grid-template-columns:1fr}
+@media(min-width:700px){.focus{grid-template-columns:repeat(2,1fr)}}
+.focus div h3{font-size:17px;margin-bottom:6px}
+.focus div p{margin:0;color:var(--ink-soft);font-size:15px}
+.focus div{border-left:3px solid var(--real);padding-left:14px}
+
+/* ---------- PROJECT CARDS ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:24px;margin-bottom:22px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card > p{color:var(--ink-soft);font-size:15.5px;margin:0 0 18px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0}
+.step{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;background:var(--paper);
+  border:1px solid var(--line);padding:7px 11px;
+}
+.arrow{color:var(--imag);font-size:16px}
+.card img{width:100%;border:1px solid var(--line);margin:6px 0 14px;display:block}
+.result{border-top:2px solid var(--real);padding-top:12px;margin-top:6px;font-size:15.5px}
+.result strong{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif}
+.tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--real);border:1px solid var(--real);padding:3px 8px}
+.locked{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--imag);border:1px dashed var(--imag);padding:3px 8px}
+
+/* ---------- FIGURE: sơ đồ 4 bước + con số chính + lịch đo ---------- */
+.fig{margin:20px 0 8px;border:1px solid var(--line);background:var(--paper);padding:16px}
+.fig-title{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;font-size:15.5px;
+           line-height:1.3;margin:0 0 14px;color:var(--ink)}
+
+.fig-flow{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:660px){.fig-flow{grid-template-columns:repeat(4,1fr)}}
+.fig-step{background:var(--card);border:1px solid var(--line);padding:10px;position:relative}
+.fig-media{height:130px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.fig-media svg{width:100%;height:auto;max-height:100%}
+/* ghi đè .card img để ảnh trong figure không bị kéo full width */
+.fig-media img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;
+               border:1px solid var(--line);margin:0}
+.fig-step h4{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;font-size:13.5px;
+             font-weight:500;margin:10px 0 3px;line-height:1.25}
+.fig-step .sub{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+               color:var(--ink-soft);line-height:1.5}
+.fig-step + .fig-step::before{content:"→";position:absolute;color:var(--imag);
+             font-size:15px;left:-13px;top:50%;transform:translateY(-50%)}
+@media(max-width:659px){
+  .fig-step + .fig-step::before{left:50%;top:-13px;transform:translate(-50%,-50%) rotate(90deg)}
+}
+
+.fig-stats{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-top:16px}
+@media(min-width:660px){.fig-stats{grid-template-columns:repeat(4,1fr)}}
+.fig-stat{border-top:2px solid var(--real);padding-top:8px}
+.fig-stat b{display:block;font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;
+            font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.fig-stat .cap{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+
+.fig-sched{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.fig-row{margin-top:12px}
+.fig-row:first-of-type{margin-top:0}
+.fig-row .lab{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+              font-size:13px;color:var(--ink-soft);margin-bottom:5px}
+.fig-row .lab .t{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink);white-space:nowrap}
+.fig-bar{display:flex;gap:1px;height:13px;background:#EAE6DF}
+.fig-bar i{display:block;min-width:2px;background:var(--real)}
+.fig-bar i:nth-child(even){opacity:.55}
+.fig-bar.is-fast i{background:var(--imag)}
+.fig-key{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-soft);margin:5px 0 0}
+
+/* ---------- CV ---------- */
+.entry{padding:16px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:none}
+.entry h3{font-size:17px;margin-bottom:2px}
+.entry .when{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--imag);letter-spacing:.05em}
+.entry p{margin:6px 0 0;color:var(--ink-soft);font-size:15px}
+.subhead{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:34px 0 4px}
+.subhead:first-of-type{margin-top:0}
+
+/* ---------- PUBS ---------- */
+ol.pubs{list-style:none;counter-reset:p;padding:0;margin:0}
+ol.pubs li{counter-increment:p;padding:14px 0 14px 44px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px}
+ol.pubs li::before{
+  content:counter(p,decimal-leading-zero);position:absolute;left:0;top:16px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--imag);
+}
+ol.pubs em{color:var(--ink-soft);font-style:normal;display:block;font-size:14px}
+a.inline{color:var(--real)}
+
+footer{padding:44px 0 64px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ NÚT ĐỔI NGÔN NGỮ ============ -->
+<div class="wrap">
+  <nav class="langbar" aria-label="Language">
+    <button data-set="en" aria-pressed="true">EN</button>
+    <button data-set="ko" aria-pressed="false">한국어</button>
+    <button data-set="vi" aria-pressed="false">VI</button>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<header>
+  <div class="wrap">
+    <div class="intro">
+      <img class="portrait" src="figures/portrait.jpg" alt="Tran Thi Huyen Tran" draggable="false">
+      <div>
+    <div class="eyebrow">
+      <span class="L" lang="en">Impedance Spectroscopy &middot; Materials Characterization</span>
+      <span class="L" lang="ko">임피던스 분광법 &middot; 재료 분석</span>
+      <span class="L" lang="vi">Phổ trở kháng &middot; Phân tích vật liệu</span>
+    </div>
+
+    <h1>Tran Thi Huyen Tran</h1>
+
+    <p class="tagline">
+      <span class="L" lang="en">Materials scientist (Ph.D.) working on impedance spectroscopy — physics-based modelling, measurement automation in Python, and characterization of ceramics, electrolytes and Li-ion cells over a wide temperature range under controlled atmospheres. I also work on human body impedance and on wavelet-based fast impedance spectroscopy.</span>
+      <span class="L" lang="ko">임피던스 분광법을 연구하는 재료공학 박사입니다. 물리 기반 모델링, Python 기반 측정 자동화, 그리고 넓은 온도 범위와 분위기 제어 조건에서 세라믹·전해질·리튬이온 셀의 특성 평가를 수행합니다. 이와 함께 인체 임피던스와 웨이블릿 기반 고속 임피던스 분광법을 연구합니다.</span>
+      <span class="L" lang="vi">Tiến sĩ Khoa học Vật liệu, nghiên cứu phổ trở kháng — mô hình dựa trên vật lý, tự động hoá phép đo bằng Python, và phân tích gốm, chất điện giải, pin Li-ion trong dải nhiệt độ rộng và môi trường khí kiểm soát. Ngoài ra tôi nghiên cứu trở kháng cơ thể người và phổ trở kháng nhanh dựa trên biến đổi wavelet.</span>
+    </p>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="links">
+          <a href="#work">
+            <span class="L" lang="en">Research</span>
+            <span class="L" lang="ko">연구</span>
+            <span class="L" lang="vi">Nghiên cứu</span>
+          </a>
+          <a href="#cv">
+            <span class="L" lang="en">Experience</span>
+            <span class="L" lang="ko">경력</span>
+            <span class="L" lang="vi">Kinh nghiệm</span>
+          </a>
+          <a href="#projects">
+            <span class="L" lang="en">Projects</span>
+            <span class="L" lang="ko">연구 과제</span>
+            <span class="L" lang="vi">Dự án</span>
+          </a>
+          <a href="#pubs">
+            <span class="L" lang="en">Publications</span>
+            <span class="L" lang="ko">논문</span>
+            <span class="L" lang="vi">Công bố</span>
+          </a>
+          <a href="#talks">
+            <span class="L" lang="en">Presentations</span>
+            <span class="L" lang="ko">학회 발표</span>
+            <span class="L" lang="vi">Hội nghị</span>
+          </a>
+          <a href="https://scholar.google.com/citations?user=uDmM0ccAAAAJ&amp;hl=en">Scholar</a>
+          <a href="https://orcid.org/0000-0001-7741-1244">ORCID</a>
+          <a href="https://github.com/TranTran1501">GitHub</a>
+        </div>
+
+        <p class="meta">
+          <span class="L" lang="en">Gwangju, Republic of Korea</span>
+          <span class="L" lang="ko">대한민국 광주</span>
+          <span class="L" lang="vi">Gwangju, Hàn Quốc</span>
+        </p>
+      </div>
+
+      <!-- Chữ ký của trang: đường Nyquist tự vẽ theo tần số -->
+      <figure class="plot" style="margin:0">
+        <svg viewBox="0 0 300 200" role="img" aria-label="Nyquist plot">
+          <g stroke="#DED9D1" stroke-width="1">
+            <line x1="34" y1="170" x2="288" y2="170"/>
+            <line x1="34" y1="170" x2="34" y2="16"/>
+          </g>
+          <text x="150" y="192" font-family="IBM Plex Mono" font-size="10" fill="#5A6167" text-anchor="middle">Z′ (Ω)</text>
+          <text x="14" y="96" font-family="IBM Plex Mono" font-size="10" fill="#5A6167" text-anchor="middle" transform="rotate(-90 14 96)">−Z″ (Ω)</text>
+          <path d="M52 168 C54 108 96 78 134 94 C152 101 156 128 145 132 C136 135 134 122 145 114 L252 34"
+                fill="none" stroke="#0E6E6B" stroke-width="2.5" stroke-linecap="round"
+                stroke-dasharray="345" stroke-dashoffset="345">
+            <animate attributeName="stroke-dashoffset" from="345" to="0" dur="3s" fill="freeze"/>
+          </path>
+          <circle r="4.5" fill="#C1741A">
+            <animateMotion dur="3s" fill="freeze"
+              path="M52 168 C54 108 96 78 134 94 C152 101 156 128 145 132 C136 135 134 122 145 114 L252 34"/>
+          </circle>
+        </svg>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HƯỚNG NGHIÊN CỨU ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Focus</span>
+      <span class="L" lang="ko">연구 분야</span>
+      <span class="L" lang="vi">Hướng nghiên cứu</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">How I work</span>
+      <span class="L" lang="ko">연구 방식</span>
+      <span class="L" lang="vi">Cách tôi làm việc</span>
+    </h2>
+
+    <p class="lead">
+      <span class="L" lang="en">I design measurement systems end to end — instrument control, synchronisation, acquisition, and physics-based interpretation — so that characterization becomes a reproducible system rather than a one-off experiment.</span>
+      <span class="L" lang="ko">장비 제어부터 동기화, 데이터 수집, 물리 기반 해석까지 측정 시스템 전체를 설계합니다. 특성 평가가 일회성 실험이 아니라 재현 가능한 시스템이 되도록 하는 것이 목표입니다.</span>
+      <span class="L" lang="vi">Tôi thiết kế hệ đo trọn vẹn từ đầu đến cuối — điều khiển thiết bị, đồng bộ, thu thập dữ liệu và diễn giải dựa trên vật lý — để việc phân tích đặc trưng trở thành một hệ thống tái lập được, thay vì một thí nghiệm đơn lẻ.</span>
+    </p>
+
+    <div class="focus">
+      <div>
+        <h3>
+          <span class="L" lang="en">Materials characterization</span>
+          <span class="L" lang="ko">재료 특성 평가</span>
+          <span class="L" lang="vi">Phân tích đặc trưng vật liệu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Impedance and dielectric spectroscopy, XRD, SEM, TEM, DSC/DTA, together with thermal and controlled-atmosphere processing.</span>
+          <span class="L" lang="ko">임피던스·유전 분광법, XRD, SEM, TEM, DSC/DTA, 그리고 열처리 및 분위기 제어 공정.</span>
+          <span class="L" lang="vi">Phổ trở kháng và điện môi, XRD, SEM, TEM, DSC/DTA, cùng với xử lý nhiệt và môi trường khí kiểm soát.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Measurement automation</span>
+          <span class="L" lang="ko">측정 자동화</span>
+          <span class="L" lang="vi">Tự động hoá phép đo</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Python/SCPI instrument control, temperature synchronisation, stabilisation criteria and multi-channel acquisition — including a fast impedance system using PRBS excitation and continuous wavelet transform, developed with the Jožef Stefan Institute.</span>
+          <span class="L" lang="ko">Python/SCPI 기반 장비 제어, 온도 동기화, 안정화 기준 설정, 다채널 측정. PRBS 여기와 연속 웨이블릿 변환을 이용한 고속 임피던스 측정 시스템을 Jožef Stefan Institute와 공동 개발.</span>
+          <span class="L" lang="vi">Điều khiển thiết bị bằng Python/SCPI, đồng bộ nhiệt độ, tiêu chí ổn định và thu thập đa kênh — bao gồm hệ đo trở kháng nhanh dùng kích thích PRBS và biến đổi wavelet liên tục, phát triển cùng Viện Jožef Stefan.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Modelling &amp; data analysis</span>
+          <span class="L" lang="ko">모델링 및 데이터 분석</span>
+          <span class="L" lang="vi">Mô hình &amp; phân tích dữ liệu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Physics-based and equivalent-circuit modelling, CNLS fitting, Kramers–Kronig validation and Python data pipelines — used to separate cathode and anode contributions in full cells and to quantify ion transport.</span>
+          <span class="L" lang="ko">물리 기반 및 등가회로 모델링, CNLS 피팅, Kramers–Kronig 검증, Python 데이터 파이프라인. 풀셀에서 양극·음극 기여를 분리하고 이온 수송을 정량화하는 데 활용.</span>
+          <span class="L" lang="vi">Mô hình dựa trên vật lý và mạch tương đương, CNLS fitting, kiểm tra Kramers–Kronig và pipeline dữ liệu Python — dùng để tách đóng góp của cathode và anode trong full cell và định lượng vận chuyển ion.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Systems I work on</span>
+          <span class="L" lang="ko">연구 대상 시스템</span>
+          <span class="L" lang="vi">Các hệ tôi nghiên cứu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">AlN ceramics for semiconductor CVD equipment, Li-ion full cells, liquid and polymer electrolytes, polycrystalline solid electrolytes, piezoelectric ceramics — and the human body.</span>
+          <span class="L" lang="ko">반도체 CVD 장비용 AlN 세라믹, 리튬이온 풀셀, 액체·고분자 전해질, 다결정 고체 전해질, 압전 세라믹, 그리고 인체.</span>
+          <span class="L" lang="vi">Gốm AlN cho thiết bị CVD bán dẫn, full cell Li-ion, chất điện giải lỏng và polymer, chất điện giải rắn đa tinh thể, gốm áp điện — và cơ thể người.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="card-slot" data-src="sections/projects.html"></div>
+
+<!-- ============ PORTFOLIO ============ -->
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Portfolio</span>
+      <span class="L" lang="ko">포트폴리오</span>
+      <span class="L" lang="vi">Portfolio</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Research activity</span>
+      <span class="L" lang="ko">연구 활동</span>
+      <span class="L" lang="vi">Hoạt động nghiên cứu</span>
+    </h2>
+
+    <!-- ===================================================================
+         CAC CARD NGHIEN CUU
+         Moi card nam trong mot file rieng trong thu muc cards/.
+         Muon sua noi dung: mo dung file do, khong can dong vao index.html.
+         Muon them card moi: tao file trong cards/ va them mot dong o day.
+         Muon doi thu tu: doi thu tu cac dong duoi day.
+         =================================================================== -->
+    <div class="card-slot" data-src="cards/01-fast-eis.html"></div>
+    <div class="card-slot" data-src="cards/02-aln.html"></div>
+    <div class="card-slot" data-src="cards/03-nvp-lvp.html"></div>
+    <div class="card-slot" data-src="cards/04-electrolytes.html"></div>
+    <div class="card-slot" data-src="cards/05-llzo.html"></div>
+    <div class="card-slot" data-src="cards/06-bioimpedance.html"></div>
+
+    <p id="card-fallback" hidden style="font-size:15px;color:var(--imag);
+       font-family:'IBM Plex Mono',monospace;border:1px dashed var(--imag);padding:14px">
+      Cards could not be loaded. Open the site through a web server
+      (e.g. <code>python -m http.server</code>) or run <code>build.py</code>
+      to produce a single-file version.
+    </p>
+
+    <!-- ===== HẾT KHỐI DỰ ÁN ===== -->
+  </div>
+</section>
+
+<!-- ============ KINH NGHIỆM & HỌC VẤN ============ -->
+<section id="cv">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Background</span>
+      <span class="L" lang="ko">이력</span>
+      <span class="L" lang="vi">Quá trình</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Experience &amp; education</span>
+      <span class="L" lang="ko">경력 및 학력</span>
+      <span class="L" lang="vi">Kinh nghiệm &amp; học vấn</span>
+    </h2>
+
+    <div class="subhead">
+      <span class="L" lang="en">Experience</span>
+      <span class="L" lang="ko">경력</span>
+      <span class="L" lang="vi">Kinh nghiệm</span>
+    </div>
+
+    <div class="entry">
+      <div class="when">2024.09 — <span class="L" lang="en">present</span><span class="L" lang="ko">현재</span><span class="L" lang="vi">nay</span></div>
+      <h3>
+        <span class="L" lang="en">Postdoctoral Researcher, Chonnam National University</span>
+        <span class="L" lang="ko">박사후연구원, 전남대학교</span>
+        <span class="L" lang="vi">Nghiên cứu viên sau tiến sĩ, Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Impedance methodology and automated measurement platforms for ionics materials; industry programmes with Samsung Electronics and Samsung SDI. Seven funded research programmes delivered.</span>
+        <span class="L" lang="ko">이온 전도 재료를 위한 임피던스 방법론 및 자동 측정 플랫폼 개발. 삼성전자·삼성SDI 산학 과제 포함, 총 7개 연구 과제 수행.</span>
+        <span class="L" lang="vi">Phương pháp luận trở kháng và hệ đo tự động cho vật liệu ion; các đề tài hợp tác với Samsung Electronics và Samsung SDI. Đã hoàn thành 7 đề tài nghiên cứu.</span>
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="when">2016.03 — 2024.08</div>
+      <h3>
+        <span class="L" lang="en">Graduate Researcher (M.Sc., Ph.D.), Chonnam National University</span>
+        <span class="L" lang="ko">대학원 연구원 (석사·박사), 전남대학교</span>
+        <span class="L" lang="vi">Nghiên cứu sinh (Thạc sĩ, Tiến sĩ), Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Impedance modelling of solid electrolytes and mixed conductors; bioimpedance study with 500+ IRB-approved participants and over 5,000 EIS datasets; ceramic processing and structural characterization (XRD, SEM/FE-SEM, TEM).</span>
+        <span class="L" lang="ko">고체 전해질 및 혼합 전도체의 임피던스 모델링, IRB 승인 참가자 500명 이상·EIS 데이터 5,000건 이상의 생체 임피던스 연구, 세라믹 공정 및 구조 분석(XRD, SEM/FE-SEM, TEM).</span>
+        <span class="L" lang="vi">Mô hình trở kháng chất điện giải rắn và dẫn hỗn hợp; nghiên cứu bioimpedance với hơn 500 người tham gia được IRB phê duyệt và trên 5.000 bộ dữ liệu EIS; chế tạo gốm và phân tích cấu trúc (XRD, SEM/FE-SEM, TEM).</span>
+      </p>
+    </div>
+
+    <div class="subhead">
+      <span class="L" lang="en">Education</span>
+      <span class="L" lang="ko">학력</span>
+      <span class="L" lang="vi">Học vấn</span>
+    </div>
+
+    <div class="entry">
+      <div class="when">2018 — 2024</div>
+      <h3>
+        <span class="L" lang="en">Ph.D., Materials Science &amp; Engineering — Chonnam National University</span>
+        <span class="L" lang="ko">공학박사, 신소재공학 — 전남대학교</span>
+        <span class="L" lang="vi">Tiến sĩ, Khoa học &amp; Kỹ thuật Vật liệu — Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Physics-based impedance modelling of mixed conductors, electrolytes and body segments.</span>
+        <span class="L" lang="ko">혼합 전도체·전해질·인체 조직의 물리 기반 임피던스 모델링.</span>
+        <span class="L" lang="vi">Mô hình trở kháng dựa trên vật lý cho dẫn hỗn hợp, chất điện giải và mô cơ thể.</span>
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="when">2016 — 2018</div>
+      <h3>
+        <span class="L" lang="en">M.Sc., Materials Science &amp; Engineering — Chonnam National University</span>
+        <span class="L" lang="ko">공학석사, 신소재공학 — 전남대학교</span>
+        <span class="L" lang="vi">Thạc sĩ, Khoa học &amp; Kỹ thuật Vật liệu — Đại học Quốc gia Chonnam</span>
+      </h3>
+    </div>
+
+    <div class="entry">
+      <div class="when">2011 — 2015</div>
+      <h3>
+        <span class="L" lang="en">B.Sc., Materials Science — University of Science, Ho Chi Minh City</span>
+        <span class="L" lang="ko">이학사, 재료과학 — 호치민시 자연과학대학교</span>
+        <span class="L" lang="vi">Cử nhân, Khoa học Vật liệu — Trường Đại học Khoa học Tự nhiên, TP. Hồ Chí Minh</span>
+      </h3>
+    </div>
+
+    <div class="subhead">
+      <span class="L" lang="en">Awards &amp; languages</span>
+      <span class="L" lang="ko">수상 및 언어</span>
+      <span class="L" lang="vi">Giải thưởng &amp; ngôn ngữ</span>
+    </div>
+
+    <div class="entry">
+      <p style="margin-top:0">
+        <span class="L" lang="en">Best Poster Prize, 4th AEIS, Japan (2024) &middot; BK21 Graduate Research Fellowship, NRF Korea (2018–2022) &middot; Vietnamese (native), English (professional), Korean (TOPIK 4)</span>
+        <span class="L" lang="ko">제4회 AEIS 우수 포스터상, 일본 (2024) &middot; BK21 대학원 연구장학금, 한국연구재단 (2018–2022) &middot; 베트남어(모국어), 영어(업무 가능), 한국어(TOPIK 4급)</span>
+        <span class="L" lang="vi">Giải Poster xuất sắc, AEIS lần thứ 4, Nhật Bản (2024) &middot; Học bổng nghiên cứu BK21, NRF Hàn Quốc (2018–2022) &middot; Tiếng Việt (bản ngữ), tiếng Anh (thành thạo), tiếng Hàn (TOPIK 4)</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÔNG BỐ ============ -->
+<section id="pubs">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Publications</span>
+      <span class="L" lang="ko">논문</span>
+      <span class="L" lang="vi">Công bố</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Peer-reviewed work</span>
+      <span class="L" lang="ko">학술 논문</span>
+      <span class="L" lang="vi">Bài báo khoa học</span>
+    </h2>
+
+    <div class="subhead">
+      <span class="L" lang="en">Journal articles</span>
+      <span class="L" lang="ko">학술지 논문</span>
+      <span class="L" lang="vi">Bài báo tạp chí</span>
+    </div>
+
+    <ol class="pubs">
+      <li>
+        N. Ecebaş, A. Ayuningsih, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, W. Jo.
+        Processing and optimization of textured (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–BaTiO<sub>3</sub>–SrTiO<sub>3</sub> incipient piezoelectric ceramics by templated grain growth using NaNbO<sub>3</sub> templates.
+        <em>Journal of the Korean Ceramic Society, 2026.</em>
+      </li>
+      <li>
+        N. Ecebaş, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, YB. Han, W. Jo.
+        The effect of sintering atmosphere and temperature on densification, grain growth behaviour and electrical properties of 0.685(Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–0.065BaTiO<sub>3</sub>–0.25SrTiO<sub>3</sub> ceramics.
+        <em>Crystals 16(2), 143, 2026.</em>
+      </li>
+      <li>
+        A. Ayuningsih, N. Ecebaş, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, W. Jo.
+        Texturing (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–KNbO<sub>3</sub>–SrTiO<sub>3</sub> electrostrictive ceramics by templated grain growth using (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub> platelets.
+        <em>Inorganics 13(12), 387, 2025.</em>
+      </li>
+      <li>
+        I. Abbas, <b>H. T. Tran</b>, T. T. N. Tran, T. L. Pham, EC. Shin, CW. Park, SB. Yu, O. J. Lee, AG. Nguyen, D. Jeong, et al.
+        GITT limitations and EIS insights into kinetics of NMC622.
+        <em>Batteries 11(6), 234, 2025.</em>
+      </li>
+      <li>
+        K. Andleeb, T. T. Doan, J. G. Fisher, <b>T. T. H. Tran</b>, JS. Lee, WJ. Choi, W. Jo.
+        Fabrication of textured 0.685(Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–0.065BaTiO<sub>3</sub>–0.25SrTiO<sub>3</sub> electrostrictive ceramics by templated grain growth using NaNbO<sub>3</sub> templates and characterization of their electrical properties.
+        <em>Crystals 14(10), 861, 2024.</em>
+      </li>
+      <li>
+        T. T. Doan, J. G. Fisher, JS. Lee, <b>H. T. Tran</b>, J. Gao, J. Mok, J. Lee, A. Benčan, G. Dražić, S. B. Junaid, et al.
+        Growth of KNbO<sub>3</sub> single crystals by the flux method using KBO<sub>2</sub> as a flux.
+        <em>Inorganics 12(6), 151, 2024.</em>
+      </li>
+      <li>
+        P. G. Le, <b>H. T. Tran</b>, JS. Lee, J. G. Fisher, HP. Kim, W. Jo, WJ. Moon.
+        Growth of single crystals in the (Na<sub>1/2</sub>Bi<sub>1/2</sub>)TiO<sub>3</sub>–(Sr<sub>1−x</sub>Ca<sub>x</sub>)TiO<sub>3</sub> system by solid state crystal growth.
+        <em>Journal of Advanced Ceramics 10(5), 973–990, 2021.</em>
+      </li>
+      <li>
+        H. Sun, J. G. Fisher, SH. Moon, <b>H. T. Tran</b>, JS. Lee, HS. Han, HP. Kim, W. Jo.
+        Solid-state growth of lead-free piezoelectric (Na<sub>1/2</sub>Bi<sub>1/2</sub>)TiO<sub>3</sub>–CaTiO<sub>3</sub> single crystals and their characterization.
+        <em>Materials Science and Engineering: B 223, 109–119, 2017.</em>
+      </li>
+    </ol>
+
+    <div class="subhead">
+      <span class="L" lang="en">Conference proceedings</span>
+      <span class="L" lang="ko">학술대회 발표</span>
+      <span class="L" lang="vi">Kỷ yếu hội nghị</span>
+    </div>
+
+    <ol class="pubs">
+      <li>
+        JS. Lee, <b>T. T. H. Tran</b>, CW. Park, T. L. Pham, EC. Shin, K. S. Yun, H. J. Kim, JH. Yu.
+        Physics-based EIS modeling of solid oxide cells: ionic/electronic rails, diffusion–reaction kinetics, and gas transport.
+        <em>ECS Meeting Abstracts, SOFC 2025.</em>
+      </li>
+      <li>
+        <b>T. T. H. Tran</b>, T. L. Pham, J. Kim, EC. Shin, CW. Ahn, DS. Park, N. Shin, J. Kim, JS. Lee.
+        Physics-based impedance modeling of polycrystalline solid electrolytes assisted by data science tools: application to Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub>.
+        <em>Proc. 24th International Conference on Solid State Ionics (SSI-24), 2024.</em>
+      </li>
+    </ol>
+
+    <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">
+      <span class="L" lang="en">Full list on</span>
+      <span class="L" lang="ko">전체 목록은</span>
+      <span class="L" lang="vi">Danh sách đầy đủ trên</span>
+      <a class="inline" href="https://scholar.google.com/citations?user=uDmM0ccAAAAJ&amp;hl=en">Google Scholar</a>.
+    </p>
+  </div>
+</section>
+
+<div class="card-slot" data-src="sections/presentations.html"></div>
+
+<footer>
+  <div class="wrap">
+    Tran Thi Huyen Tran &middot; Chonnam National University, Gwangju &middot;
+    <a class="inline" href="mailto:trantran@jnu.ac.kr">trantran@jnu.ac.kr</a> &middot;
+    <a class="inline" href="mailto:huyentran150193@gmail.com">huyentran150193@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+/* Nap cac card nghien cuu tu thu muc cards/.
+   Luu y: fetch khong chay duoc khi mo truc tiep bang file:// —
+   hay chay mot web server tinh, hoac dung build.py de gop thanh 1 file. */
+(async function () {
+  const slots = document.querySelectorAll('.card-slot');
+  let failed = false;
+  for (const slot of slots) {
+    try {
+      const res = await fetch(slot.dataset.src);
+      if (!res.ok) throw new Error(res.status);
+      slot.outerHTML = await res.text();
+    } catch (e) {
+      failed = true;
+      slot.remove();
+    }
+  }
+  if (failed) document.getElementById('card-fallback').hidden = false;
+})();
+</script>
+
+<script>
+/* Đổi ngôn ngữ: đặt data-lang cho thẻ <html>, CSS lo phần còn lại. */
+document.querySelectorAll('.langbar button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var lang = btn.dataset.set;
+    document.documentElement.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langbar button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
+  });
+});
+</script>
+
+</body>
+</html>

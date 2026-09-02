@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tran Thi Huyen Tran — Impedance Spectroscopy</title>
+<meta name="description" content="Research portfolio: impedance spectroscopy, physics-based modelling, measurement automation, fast impedance spectroscopy, bioimpedance.">
+<!-- Icon hiện trên tab trình duyệt. Nhúng thẳng vào file, không cần file ảnh riêng. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%2312232E"/><g stroke="%233FA9A4" stroke-width="1.8" stroke-linecap="round"><line x1="9" y1="22" x2="16.5" y2="10"/><line x1="16.5" y1="10" x2="24" y2="20"/><line x1="9" y1="22" x2="24" y2="20"/></g><circle cx="9" cy="22" r="3.1" fill="%233FA9A4"/><circle cx="24" cy="20" r="3.1" fill="%233FA9A4"/><circle cx="16.5" cy="10" r="3.4" fill="%23E0913A"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3EF;      /* nền be nhạt */
+  --ink:#1A2B33;        /* chữ chính */
+  --ink-soft:#5A6167;   /* chữ phụ */
+  --line:#DED9D1;       /* đường kẻ */
+  --real:#0E6E6B;       /* teal — trục thực */
+  --imag:#C1741A;       /* ochre — trục ảo */
+  --card:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans","IBM Plex Sans KR",system-ui,sans-serif; font-size:17px; line-height:1.65;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;line-height:1.15;margin:0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--imag)}
+
+/* ===================================================================
+   PHẦN ĐỔI NGÔN NGỮ
+   Mọi đoạn chữ dịch được bọc trong <span class="L" lang="en"> ...
+   CSS bên dưới ẩn hết, chỉ hiện ngôn ngữ đang được chọn.
+   =================================================================== */
+.L{display:none}
+html[data-lang="en"] .L[lang="en"],
+html[data-lang="ko"] .L[lang="ko"],
+html[data-lang="vi"] .L[lang="vi"]{display:inline}
+
+.langbar{display:flex;justify-content:flex-end;gap:6px;padding:18px 0 0}
+.langbar button{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;
+  background:none;border:1px solid var(--line);color:var(--ink-soft);
+  border-radius:999px;padding:6px 13px;cursor:pointer;transition:.15s;
+}
+.langbar button:hover{border-color:var(--ink);color:var(--ink)}
+.langbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.langbar button:focus-visible{outline:2px solid var(--imag);outline-offset:3px}
+
+/* ---------- HERO ---------- */
+header{padding:26px 0 56px;border-bottom:1px solid var(--line)}
+.intro{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.intro > div{flex:1 1 320px}
+.portrait{
+  width:150px;height:150px;object-fit:cover;flex:none;
+  border:1px solid var(--line);border-radius:50%;margin-top:6px;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+@media(max-width:560px){.portrait{width:112px;height:112px}}
+h1{font-size:clamp(34px,7vw,58px);font-weight:700;letter-spacing:-.02em;margin:10px 0 14px}
+.tagline{font-size:clamp(16px,2.2vw,19px);color:var(--ink-soft);max-width:36em}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;margin-top:34px}
+@media(min-width:760px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+.plot{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:12px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--ink);border-radius:999px;padding:9px 17px;transition:.18s;
+}
+.links a:hover{background:var(--ink);color:var(--paper)}
+.links a:focus-visible{outline:2px solid var(--imag);outline-offset:3px}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-soft);margin:16px 0 0}
+
+/* ---------- SECTIONS ---------- */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(24px,4vw,32px);margin:8px 0 28px}
+.lead{font-size:17.5px;color:var(--ink-soft);max-width:44em;margin:0 0 30px}
+.focus{display:grid;gap:26px 32px;grid-template-columns:1fr}
+@media(min-width:700px){.focus{grid-template-columns:repeat(2,1fr)}}
+.focus div h3{font-size:17px;margin-bottom:6px}
+.focus div p{margin:0;color:var(--ink-soft);font-size:15px}
+.focus div{border-left:3px solid var(--real);padding-left:14px}
+
+/* ---------- PROJECT CARDS ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:24px;margin-bottom:22px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card > p{color:var(--ink-soft);font-size:15.5px;margin:0 0 18px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0}
+.step{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;background:var(--paper);
+  border:1px solid var(--line);padding:7px 11px;
+}
+.arrow{color:var(--imag);font-size:16px}
+.card img{width:100%;border:1px solid var(--line);margin:6px 0 14px;display:block}
+.result{border-top:2px solid var(--real);padding-top:12px;margin-top:6px;font-size:15.5px}
+.result strong{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif}
+.tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--real);border:1px solid var(--real);padding:3px 8px}
+.locked{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--imag);border:1px dashed var(--imag);padding:3px 8px}
+
+/* ---------- FIGURE: sơ đồ 4 bước + con số chính + lịch đo ---------- */
+.fig{margin:20px 0 8px;border:1px solid var(--line);background:var(--paper);padding:16px}
+.fig-title{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;font-size:15.5px;
+           line-height:1.3;margin:0 0 14px;color:var(--ink)}
+
+.fig-flow{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:660px){.fig-flow{grid-template-columns:repeat(4,1fr)}}
+.fig-step{background:var(--card);border:1px solid var(--line);padding:10px;position:relative}
+.fig-media{height:130px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.fig-media svg{width:100%;height:auto;max-height:100%}
+/* ghi đè .card img để ảnh trong figure không bị kéo full width */
+.fig-media img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;
+               border:1px solid var(--line);margin:0}
+.fig-step h4{font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;font-size:13.5px;
+             font-weight:500;margin:10px 0 3px;line-height:1.25}
+.fig-step .sub{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;
+               color:var(--ink-soft);line-height:1.5}
+.fig-step + .fig-step::before{content:"→";position:absolute;color:var(--imag);
+             font-size:15px;left:-13px;top:50%;transform:translateY(-50%)}
+@media(max-width:659px){
+  .fig-step + .fig-step::before{left:50%;top:-13px;transform:translate(-50%,-50%) rotate(90deg)}
+}
+
+.fig-stats{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-top:16px}
+@media(min-width:660px){.fig-stats{grid-template-columns:repeat(4,1fr)}}
+.fig-stat{border-top:2px solid var(--real);padding-top:8px}
+.fig-stat b{display:block;font-family:"Space Grotesk","IBM Plex Sans KR",sans-serif;
+            font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.fig-stat .cap{display:block;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+
+.fig-sched{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.fig-row{margin-top:12px}
+.fig-row:first-of-type{margin-top:0}
+.fig-row .lab{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+              font-size:13px;color:var(--ink-soft);margin-bottom:5px}
+.fig-row .lab .t{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink);white-space:nowrap}
+.fig-bar{display:flex;gap:1px;height:13px;background:#EAE6DF}
+.fig-bar i{display:block;min-width:2px;background:var(--real)}
+.fig-bar i:nth-child(even){opacity:.55}
+.fig-bar.is-fast i{background:var(--imag)}
+.fig-key{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-soft);margin:5px 0 0}
+
+/* ---------- CV ---------- */
+.entry{padding:16px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:none}
+.entry h3{font-size:17px;margin-bottom:2px}
+.entry .when{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--imag);letter-spacing:.05em}
+.entry p{margin:6px 0 0;color:var(--ink-soft);font-size:15px}
+.subhead{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:34px 0 4px}
+.subhead:first-of-type{margin-top:0}
+
+/* ---------- PUBS ---------- */
+ol.pubs{list-style:none;counter-reset:p;padding:0;margin:0}
+ol.pubs li{counter-increment:p;padding:14px 0 14px 44px;border-bottom:1px solid var(--line);position:relative;font-size:15.5px}
+ol.pubs li::before{
+  content:counter(p,decimal-leading-zero);position:absolute;left:0;top:16px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--imag);
+}
+ol.pubs em{color:var(--ink-soft);font-style:normal;display:block;font-size:14px}
+a.inline{color:var(--real)}
+
+footer{padding:44px 0 64px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ NÚT ĐỔI NGÔN NGỮ ============ -->
+<div class="wrap">
+  <nav class="langbar" aria-label="Language">
+    <button data-set="en" aria-pressed="true">EN</button>
+    <button data-set="ko" aria-pressed="false">한국어</button>
+    <button data-set="vi" aria-pressed="false">VI</button>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<header>
+  <div class="wrap">
+    <div class="intro">
+      <img class="portrait" src="figures/portrait.jpg" alt="Tran Thi Huyen Tran" draggable="false">
+      <div>
+    <div class="eyebrow">
+      <span class="L" lang="en">Impedance Spectroscopy &middot; Materials Characterization</span>
+      <span class="L" lang="ko">임피던스 분광법 &middot; 재료 분석</span>
+      <span class="L" lang="vi">Phổ trở kháng &middot; Phân tích vật liệu</span>
+    </div>
+
+    <h1>Tran Thi Huyen Tran</h1>
+
+    <p class="tagline">
+      <span class="L" lang="en">Materials scientist (Ph.D.) working on impedance spectroscopy — physics-based modelling, measurement automation in Python, and characterization of ceramics, electrolytes and Li-ion cells over a wide temperature range under controlled atmospheres. I also work on human body impedance and on wavelet-based fast impedance spectroscopy.</span>
+      <span class="L" lang="ko">임피던스 분광법을 연구하는 재료공학 박사입니다. 물리 기반 모델링, Python 기반 측정 자동화, 그리고 넓은 온도 범위와 분위기 제어 조건에서 세라믹·전해질·리튬이온 셀의 특성 평가를 수행합니다. 이와 함께 인체 임피던스와 웨이블릿 기반 고속 임피던스 분광법을 연구합니다.</span>
+      <span class="L" lang="vi">Tiến sĩ Khoa học Vật liệu, nghiên cứu phổ trở kháng — mô hình dựa trên vật lý, tự động hoá phép đo bằng Python, và phân tích gốm, chất điện giải, pin Li-ion trong dải nhiệt độ rộng và môi trường khí kiểm soát. Ngoài ra tôi nghiên cứu trở kháng cơ thể người và phổ trở kháng nhanh dựa trên biến đổi wavelet.</span>
+    </p>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="links">
+          <a href="#work">
+            <span class="L" lang="en">Research</span>
+            <span class="L" lang="ko">연구</span>
+            <span class="L" lang="vi">Nghiên cứu</span>
+          </a>
+          <a href="#cv">
+            <span class="L" lang="en">Experience</span>
+            <span class="L" lang="ko">경력</span>
+            <span class="L" lang="vi">Kinh nghiệm</span>
+          </a>
+          <a href="#projects">
+            <span class="L" lang="en">Projects</span>
+            <span class="L" lang="ko">연구 과제</span>
+            <span class="L" lang="vi">Dự án</span>
+          </a>
+          <a href="#pubs">
+            <span class="L" lang="en">Publications</span>
+            <span class="L" lang="ko">논문</span>
+            <span class="L" lang="vi">Công bố</span>
+          </a>
+          <a href="#talks">
+            <span class="L" lang="en">Presentations</span>
+            <span class="L" lang="ko">학회 발표</span>
+            <span class="L" lang="vi">Hội nghị</span>
+          </a>
+          <a href="https://scholar.google.com/citations?user=uDmM0ccAAAAJ&amp;hl=en">Scholar</a>
+          <a href="https://orcid.org/0000-0001-7741-1244">ORCID</a>
+          <a href="https://github.com/TranTran1501">GitHub</a>
+        </div>
+
+        <p class="meta">
+          <span class="L" lang="en">Gwangju, Republic of Korea</span>
+          <span class="L" lang="ko">대한민국 광주</span>
+          <span class="L" lang="vi">Gwangju, Hàn Quốc</span>
+        </p>
+      </div>
+
+      <!-- Chữ ký của trang: đường Nyquist tự vẽ theo tần số -->
+      <figure class="plot" style="margin:0">
+        <svg viewBox="0 0 300 200" role="img" aria-label="Nyquist plot">
+          <g stroke="#DED9D1" stroke-width="1">
+            <line x1="34" y1="170" x2="288" y2="170"/>
+            <line x1="34" y1="170" x2="34" y2="16"/>
+          </g>
+          <text x="150" y="192" font-family="IBM Plex Mono" font-size="10" fill="#5A6167" text-anchor="middle">Z′ (Ω)</text>
+          <text x="14" y="96" font-family="IBM Plex Mono" font-size="10" fill="#5A6167" text-anchor="middle" transform="rotate(-90 14 96)">−Z″ (Ω)</text>
+          <path d="M52 168 C54 108 96 78 134 94 C152 101 156 128 145 132 C136 135 134 122 145 114 L252 34"
+                fill="none" stroke="#0E6E6B" stroke-width="2.5" stroke-linecap="round"
+                stroke-dasharray="345" stroke-dashoffset="345">
+            <animate attributeName="stroke-dashoffset" from="345" to="0" dur="3s" fill="freeze"/>
+          </path>
+          <circle r="4.5" fill="#C1741A">
+            <animateMotion dur="3s" fill="freeze"
+              path="M52 168 C54 108 96 78 134 94 C152 101 156 128 145 132 C136 135 134 122 145 114 L252 34"/>
+          </circle>
+        </svg>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HƯỚNG NGHIÊN CỨU ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Focus</span>
+      <span class="L" lang="ko">연구 분야</span>
+      <span class="L" lang="vi">Hướng nghiên cứu</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">How I work</span>
+      <span class="L" lang="ko">연구 방식</span>
+      <span class="L" lang="vi">Cách tôi làm việc</span>
+    </h2>
+
+    <p class="lead">
+      <span class="L" lang="en">I design measurement systems end to end — instrument control, synchronisation, acquisition, and physics-based interpretation — so that characterization becomes a reproducible system rather than a one-off experiment.</span>
+      <span class="L" lang="ko">장비 제어부터 동기화, 데이터 수집, 물리 기반 해석까지 측정 시스템 전체를 설계합니다. 특성 평가가 일회성 실험이 아니라 재현 가능한 시스템이 되도록 하는 것이 목표입니다.</span>
+      <span class="L" lang="vi">Tôi thiết kế hệ đo trọn vẹn từ đầu đến cuối — điều khiển thiết bị, đồng bộ, thu thập dữ liệu và diễn giải dựa trên vật lý — để việc phân tích đặc trưng trở thành một hệ thống tái lập được, thay vì một thí nghiệm đơn lẻ.</span>
+    </p>
+
+    <div class="focus">
+      <div>
+        <h3>
+          <span class="L" lang="en">Materials characterization</span>
+          <span class="L" lang="ko">재료 특성 평가</span>
+          <span class="L" lang="vi">Phân tích đặc trưng vật liệu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Impedance and dielectric spectroscopy, XRD, SEM, TEM, DSC/DTA, together with thermal and controlled-atmosphere processing.</span>
+          <span class="L" lang="ko">임피던스·유전 분광법, XRD, SEM, TEM, DSC/DTA, 그리고 열처리 및 분위기 제어 공정.</span>
+          <span class="L" lang="vi">Phổ trở kháng và điện môi, XRD, SEM, TEM, DSC/DTA, cùng với xử lý nhiệt và môi trường khí kiểm soát.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Measurement automation</span>
+          <span class="L" lang="ko">측정 자동화</span>
+          <span class="L" lang="vi">Tự động hoá phép đo</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Python/SCPI instrument control, temperature synchronisation, stabilisation criteria and multi-channel acquisition — including a fast impedance system using PRBS excitation and continuous wavelet transform, developed with the Jožef Stefan Institute.</span>
+          <span class="L" lang="ko">Python/SCPI 기반 장비 제어, 온도 동기화, 안정화 기준 설정, 다채널 측정. PRBS 여기와 연속 웨이블릿 변환을 이용한 고속 임피던스 측정 시스템을 Jožef Stefan Institute와 공동 개발.</span>
+          <span class="L" lang="vi">Điều khiển thiết bị bằng Python/SCPI, đồng bộ nhiệt độ, tiêu chí ổn định và thu thập đa kênh — bao gồm hệ đo trở kháng nhanh dùng kích thích PRBS và biến đổi wavelet liên tục, phát triển cùng Viện Jožef Stefan.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Modelling &amp; data analysis</span>
+          <span class="L" lang="ko">모델링 및 데이터 분석</span>
+          <span class="L" lang="vi">Mô hình &amp; phân tích dữ liệu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">Physics-based and equivalent-circuit modelling, CNLS fitting, Kramers–Kronig validation and Python data pipelines — used to separate cathode and anode contributions in full cells and to quantify ion transport.</span>
+          <span class="L" lang="ko">물리 기반 및 등가회로 모델링, CNLS 피팅, Kramers–Kronig 검증, Python 데이터 파이프라인. 풀셀에서 양극·음극 기여를 분리하고 이온 수송을 정량화하는 데 활용.</span>
+          <span class="L" lang="vi">Mô hình dựa trên vật lý và mạch tương đương, CNLS fitting, kiểm tra Kramers–Kronig và pipeline dữ liệu Python — dùng để tách đóng góp của cathode và anode trong full cell và định lượng vận chuyển ion.</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>
+          <span class="L" lang="en">Systems I work on</span>
+          <span class="L" lang="ko">연구 대상 시스템</span>
+          <span class="L" lang="vi">Các hệ tôi nghiên cứu</span>
+        </h3>
+        <p>
+          <span class="L" lang="en">AlN ceramics for semiconductor CVD equipment, Li-ion full cells, liquid and polymer electrolytes, polycrystalline solid electrolytes, piezoelectric ceramics — and the human body.</span>
+          <span class="L" lang="ko">반도체 CVD 장비용 AlN 세라믹, 리튬이온 풀셀, 액체·고분자 전해질, 다결정 고체 전해질, 압전 세라믹, 그리고 인체.</span>
+          <span class="L" lang="vi">Gốm AlN cho thiết bị CVD bán dẫn, full cell Li-ion, chất điện giải lỏng và polymer, chất điện giải rắn đa tinh thể, gốm áp điện — và cơ thể người.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ============ DỰ ÁN ============
+         Sửa danh sách dự án ở file này. Mỗi dự án là một khối <div class="entry">.
+         Chỗ nào còn "TODO" là chỗ mình không có dữ liệu, chị điền giúp.
+         ================================================================= -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="L" lang="en">Projects</span>
+          <span class="L" lang="ko">연구 과제</span>
+          <span class="L" lang="vi">Dự án</span>
+        </div>
+        <h2>
+          <span class="L" lang="en">Funded research programmes</span>
+          <span class="L" lang="ko">참여 연구 과제</span>
+          <span class="L" lang="vi">Các đề tài đã tham gia</span>
+        </h2>
+
+        <p class="lead">
+          <span class="L" lang="en">Seven funded programmes, spanning industry contracts and national research grants. In each of them my part was the impedance methodology: building the measurement system, and turning the spectra into physical parameters.</span>
+          <span class="L" lang="ko">산업체 과제와 국가 연구과제를 포함해 총 7개 과제에 참여했습니다. 각 과제에서 제가 맡은 부분은 임피던스 방법론 — 측정 시스템 구축과, 스펙트럼을 물리적 파라미터로 환산하는 작업입니다.</span>
+          <span class="L" lang="vi">Bảy đề tài được tài trợ, gồm cả hợp đồng với doanh nghiệp và đề tài nghiên cứu quốc gia. Phần việc của tôi trong mỗi đề tài là phương pháp luận trở kháng: xây dựng hệ đo, và chuyển phổ đo thành các tham số vật lý.</span>
+        </p>
+
+        <!-- ---------- 1 ---------- -->
+        <div class="entry">
+          <div class="when">TODO — TODO &middot; Samsung Electronics</div>
+          <h3>
+            <span class="L" lang="en">Electrical characterization of AlN ceramics for semiconductor process equipment</span>
+            <span class="L" lang="ko">반도체 공정 장비용 AlN 세라믹의 전기적 특성 평가</span>
+            <span class="L" lang="vi">Đánh giá tính chất điện của gốm AlN cho thiết bị công nghệ bán dẫn</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">Wide-temperature impedance mapping under controlled atmospheres; separation of the surface shorting path from the intrinsic response.</span>
+            <span class="L" lang="ko">분위기 제어 조건에서의 광온도역 임피던스 매핑, 표면 단락 경로와 본질적 응답의 분리.</span>
+            <span class="L" lang="vi">Lập bản đồ trở kháng trên dải nhiệt độ rộng trong môi trường khí kiểm soát; tách đường ngắn mạch bề mặt khỏi đáp ứng nội tại.</span>
+          </p>
+        </div>
+
+        <!-- ---------- 2 ---------- -->
+        <div class="entry">
+          <div class="when">TODO — TODO &middot; Samsung SDI</div>
+          <h3>
+            <span class="L" lang="en">Impedance diagnostics of Li-ion cells and electrode materials</span>
+            <span class="L" lang="ko">리튬이온 셀 및 전극 소재의 임피던스 진단</span>
+            <span class="L" lang="vi">Chẩn đoán trở kháng pin Li-ion và vật liệu điện cực</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">Separation of cathode and anode contributions in full cells, and physics-based interpretation of the diffusion regime.</span>
+            <span class="L" lang="ko">풀셀에서 양극·음극 기여 분리 및 확산 영역의 물리 기반 해석.</span>
+            <span class="L" lang="vi">Tách đóng góp của cathode và anode trong full cell, diễn giải vùng khuếch tán dựa trên vật lý.</span>
+          </p>
+        </div>
+
+        <!-- ---------- 3 ---------- -->
+        <div class="entry">
+          <div class="when">2018 — TODO &middot; NRF Korea, Ministry of Education</div>
+          <h3>
+            <span class="L" lang="en">Human body segment impedance: measurement platform and modelling</span>
+            <span class="L" lang="ko">인체 부위별 임피던스: 측정 플랫폼 및 모델링</span>
+            <span class="L" lang="vi">Trở kháng theo vùng cơ thể người: nền tảng đo và mô hình hoá</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">Multi-channel segmental EIS on 500+ IRB-approved participants, stray-impedance analysis of the measurement chain, and a Nernst–Planck transmission-line description of body fluid. NRF 2018R1D1A1B0705008913.</span>
+            <span class="L" lang="ko">IRB 승인 참가자 500명 이상에 대한 다채널 부위별 EIS 측정, 측정 회로의 부유 임피던스 해석, 체액에 대한 Nernst–Planck 전송선 모델. 과제번호 NRF 2018R1D1A1B0705008913.</span>
+            <span class="L" lang="vi">Đo EIS theo vùng đa kênh trên hơn 500 người tham gia được IRB phê duyệt, phân tích trở kháng ký sinh của hệ đo, và mô tả dịch cơ thể bằng transmission-line Nernst–Planck. Mã đề tài NRF 2018R1D1A1B0705008913.</span>
+          </p>
+        </div>
+
+        <!-- ---------- 4 ---------- -->
+        <div class="entry">
+          <div class="when">2018 — TODO &middot; NRF Korea, MSIT</div>
+          <h3>
+            <span class="L" lang="en">Physics-based impedance modelling of ionic and mixed conductors</span>
+            <span class="L" lang="ko">이온·혼합 전도체의 물리 기반 임피던스 모델링</span>
+            <span class="L" lang="vi">Mô hình trở kháng dựa trên vật lý cho vật liệu dẫn ion và dẫn hỗn hợp</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">Simultaneous fitting of whole temperature series for polycrystalline solid electrolytes, without constant-phase elements. NRF-2018R1A5A1025224.</span>
+            <span class="L" lang="ko">CPE를 사용하지 않고 다결정 고체 전해질의 전체 온도 계열을 동시 피팅. 과제번호 NRF-2018R1A5A1025224.</span>
+            <span class="L" lang="vi">Khớp đồng thời toàn bộ chuỗi nhiệt độ cho chất điện giải rắn đa tinh thể, không dùng phần tử pha không đổi. Mã đề tài NRF-2018R1A5A1025224.</span>
+          </p>
+        </div>
+
+        <!-- ---------- 5 ---------- -->
+        <div class="entry">
+          <div class="when">TODO — TODO &middot; Jožef Stefan Institute, Slovenia</div>
+          <h3>
+            <span class="L" lang="en">Fast impedance spectroscopy by broadband excitation</span>
+            <span class="L" lang="ko">광대역 여기를 이용한 고속 임피던스 분광법</span>
+            <span class="L" lang="vi">Phổ trở kháng nhanh bằng kích thích dải rộng</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">PRBS excitation and continuous wavelet transform for cylindrical Li-ion cells, with an automated temperature and SOC schedule in Python.</span>
+            <span class="L" lang="ko">원통형 리튬이온 셀에 대한 PRBS 여기와 연속 웨이블릿 변환, Python 기반 온도·SOC 자동 측정 스케줄 구축.</span>
+            <span class="L" lang="vi">Kích thích PRBS và biến đổi wavelet liên tục cho pin Li-ion hình trụ, với lịch đo nhiệt độ và SOC tự động bằng Python.</span>
+          </p>
+        </div>
+
+        <!-- ---------- 6: TODO ----------
+        <div class="entry">
+          <div class="when">TODO — TODO &middot; TODO đơn vị tài trợ</div>
+          <h3>
+            <span class="L" lang="en">TODO project title</span>
+            <span class="L" lang="ko">TODO 과제명</span>
+            <span class="L" lang="vi">TODO tên đề tài</span>
+          </h3>
+          <p>
+            <span class="L" lang="en">TODO one sentence on your part in it.</span>
+            <span class="L" lang="ko">TODO 담당 역할 한 문장.</span>
+            <span class="L" lang="vi">TODO một câu về phần việc của chị.</span>
+          </p>
+        </div>
+        ---------------------------------->
+      </div>
+    </section>
+
+
+<!-- ============ PORTFOLIO ============ -->
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Portfolio</span>
+      <span class="L" lang="ko">포트폴리오</span>
+      <span class="L" lang="vi">Portfolio</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Research activity</span>
+      <span class="L" lang="ko">연구 활동</span>
+      <span class="L" lang="vi">Hoạt động nghiên cứu</span>
+    </h2>
+
+    <!-- ===================================================================
+         CAC CARD NGHIEN CUU
+         Moi card nam trong mot file rieng trong thu muc cards/.
+         Muon sua noi dung: mo dung file do, khong can dong vao index.html.
+         Muon them card moi: tao file trong cards/ va them mot dong o day.
+         Muon doi thu tu: doi thu tu cac dong duoi day.
+         =================================================================== -->
+    <!-- ---------- 0a. Fast EIS / PRBS ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Fast impedance spectroscopy by PRBS excitation and wavelet transform</span>
+        <span class="L" lang="ko">PRBS 여기와 웨이블릿 변환을 이용한 고속 임피던스 분광법</span>
+        <span class="L" lang="vi">Phổ trở kháng nhanh bằng kích thích PRBS và biến đổi wavelet</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Cylindrical Li-ion cells excited with a pseudo-random binary sequence instead of a stepped sine sweep; the impedance is reconstructed from the voltage–current transient by a continuous Morse wavelet transform. Keysight N6705C with an N6781A two-quadrant SMU, driven from Python over SCPI, with the Jožef Stefan Institute, Slovenia. Method after G. Nusev et al., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+        <span class="L" lang="ko">단계적 정현파 대신 의사난수 이진 신호(PRBS)를 인가하고, 전압–전류 과도응답에서 연속 Morse 웨이블릿 변환으로 임피던스를 복원. Keysight N6705C와 N6781A 2사분면 SMU를 Python/SCPI로 제어. 슬로베니아 Jožef Stefan Institute와 공동 수행, 기법은 G. Nusev et al., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+        <span class="L" lang="vi">Pin Li-ion hình trụ kích thích bằng chuỗi nhị phân giả ngẫu nhiên thay cho quét sin từng bước; trở kháng tái dựng từ quá độ điện áp–dòng điện bằng biến đổi wavelet Morse liên tục. Keysight N6705C với SMU hai góc phần tư N6781A, điều khiển bằng Python qua SCPI, hợp tác với Viện Jožef Stefan, Slovenia. Phương pháp theo G. Nusev và cs., <i>IEEE Access</i> <b>9</b>, 46152–46165 (2021).</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">From a 20-minute PRBS record to a full impedance spectrum</span>
+          <span class="L" lang="ko">20분 PRBS 측정에서 전체 임피던스 스펙트럼까지</span>
+          <span class="L" lang="vi">Từ bản ghi PRBS 20 phút đến phổ trở kháng đầy đủ</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. PRBS -->
+          <div class="fig-step">
+            <div class="fig-media">
+            <svg viewBox="0 0 200 92" role="img" aria-label="PRBS excitation waveform">
+              <line x1="6" y1="46" x2="194" y2="46" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4"/>
+              <path d="M8 66 H26 V26 H40 V66 H58 V26 H72 V66 H104 V26 H118 V66 H132 V26 H160 V66 H176 V26 H192"
+                    fill="none" stroke="var(--imag)" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            </div>
+            <h4>
+              <span class="L" lang="en">PRBS excitation</span>
+              <span class="L" lang="ko">PRBS 여기</span>
+              <span class="L" lang="vi">Kích thích PRBS</span>
+            </h4>
+            <span class="sub">f<sub>B</sub> = 0.1 Hz · 20 min ·
+              <span class="L" lang="en">small signal</span>
+              <span class="L" lang="ko">소신호</span>
+              <span class="L" lang="vi">tín hiệu nhỏ</span>
+            </span>
+          </div>
+
+          <!-- 2. V–I transient -->
+          <div class="fig-step">
+            <div class="fig-media">
+            <svg viewBox="0 0 200 92" role="img" aria-label="Synchronous voltage and current transients">
+              <path d="M8 30 C20 24 26 38 34 32 C44 25 52 42 62 34 C74 26 82 42 94 33 C106 25 116 41 128 32 C140 24 150 40 162 31 C174 24 184 34 192 29"
+                    fill="none" stroke="var(--real)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M8 80 H26 V62 H40 V80 H58 V62 H72 V80 H104 V62 H118 V80 H132 V62 H160 V80 H176 V62 H192"
+                    fill="none" stroke="var(--imag)" stroke-width="1.6" stroke-linejoin="round"/>
+              <text x="8" y="16" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--real)">V(t)</text>
+              <text x="8" y="56" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--imag)">I(t)</text>
+            </svg>
+            </div>
+            <h4>
+              <span class="L" lang="en">Synchronous V–I transient</span>
+              <span class="L" lang="ko">전압–전류 동기 측정</span>
+              <span class="L" lang="vi">Quá độ V–I đồng bộ</span>
+            </h4>
+            <span class="sub">N6705C + N6781A · Python / SCPI</span>
+          </div>
+
+          <!-- 3. CWT scalogram + Z(w) -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-fasteis-scalogram.png" alt="Continuous wavelet transform scalogram with the reconstructed impedance">
+            </div>
+            <h4>
+              <span class="L" lang="en">Continuous wavelet transform</span>
+              <span class="L" lang="ko">연속 웨이블릿 변환</span>
+              <span class="L" lang="vi">Biến đổi wavelet liên tục</span>
+            </h4>
+            <span class="sub">8.9 kHz → 0.89 mHz</span>
+          </div>
+
+          <!-- 4. Kramers-Kronig check -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-fasteis-kk.png" alt="Nyquist plot: measured spectrum against the Kramers-Kronig fit">
+            </div>
+            <h4>
+              <span class="L" lang="en">Kramers–Kronig validation</span>
+              <span class="L" lang="ko">Kramers–Kronig 검증</span>
+              <span class="L" lang="vi">Kiểm tra Kramers–Kronig</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">measured vs KK fit</span>
+              <span class="L" lang="ko">측정값 vs KK 피팅</span>
+              <span class="L" lang="vi">đo vs khớp KK</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>0.89 mHz</b>
+            <span class="cap">
+              <span class="L" lang="en">from a single 20-minute record</span>
+              <span class="L" lang="ko">단일 20분 측정으로 도달</span>
+              <span class="L" lang="vi">từ một bản ghi 20 phút</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>23 m 55 s</b>
+            <span class="cap">
+              <span class="L" lang="en">full spectrum, against 1 h 37 m with the 0.01 Hz segment</span>
+              <span class="L" lang="ko">전체 스펙트럼 (0.01 Hz 구간 포함 시 1시간 37분)</span>
+              <span class="L" lang="vi">toàn phổ, so với 1 h 37 m nếu đo đoạn 0,01 Hz</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>&lt; 5 %</b>
+            <span class="cap">
+              <span class="L" lang="en">KK residuals over most of the range</span>
+              <span class="L" lang="ko">대부분 구간에서 KK 잔차</span>
+              <span class="L" lang="vi">sai số KK trên phần lớn dải tần</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>13 T &middot; 18 SOC</b>
+            <span class="cap">
+              <span class="L" lang="en">11–40 °C and 2.5–4.2 V in 0.1 V steps</span>
+              <span class="L" lang="ko">11–40 °C, 2.5–4.2 V (0.1 V 간격)</span>
+              <span class="L" lang="vi">11–40 °C và 2,5–4,2 V (bước 0,1 V)</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- lịch đo ---- -->
+        <div class="fig-sched">
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">With the 0.01 Hz segment</span>
+                <span class="L" lang="ko">0.01 Hz 구간 포함</span>
+                <span class="L" lang="vi">Có đo đoạn 0,01 Hz</span>
+              </span>
+              <span class="t">1 h 37 m</span>
+            </div>
+            <div class="fig-bar">
+              <i style="flex:0 0 85.71%"></i><i style="flex:0 0 10.28%"></i><i style="flex:0 0 3.43%"></i>
+              <i style="flex:0 0 0.51%"></i><i style="flex:0 0 0.05%"></i><i style="flex:0 0 0.02%"></i>
+            </div>
+            <p class="fig-key">0.01 Hz 5000 s · 0.1 Hz 600 s · 1 Hz 200 s · 10 Hz 30 s · 100 Hz 3 s · 1 kHz 1 s</p>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">From 0.1 Hz, low frequencies recovered by the wavelet</span>
+                <span class="L" lang="ko">0.1 Hz부터 시작, 저주파는 웨이블릿으로 복원</span>
+                <span class="L" lang="vi">Từ 0,1 Hz, vùng tần thấp phục hồi bằng wavelet</span>
+              </span>
+              <span class="t">23 m 55 s</span>
+            </div>
+            <div class="fig-bar is-fast">
+              <i style="flex:0 0 20.57%"></i><i style="flex:0 0 3.43%"></i><i style="flex:0 0 0.51%"></i>
+              <i style="flex:0 0 0.05%"></i><i style="flex:0 0 0.02%"></i>
+            </div>
+            <p class="fig-key">0.1 Hz 1200 s · 1 Hz 200 s · 10 Hz 30 s · 100 Hz 3 s · 1 kHz 1 s</p>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">A 20-minute record at 0.1 Hz reaches 0.89 mHz, so a full spectrum takes about 24 minutes instead of more than 1.5 hours. The ohmic, charge-transfer and diffusion features match classical EIS, with Kramers–Kronig residuals below 5 % over most of the range. Temperature and SOC series run unattended, each acquisition triggered at dE/dt ≤ 3 mV.</span>
+        <span class="L" lang="ko">0.1 Hz에서 20분 측정으로 0.89 mHz까지 도달, 1.5시간 이상 대신 약 24분 만에 전체 스펙트럼을 확보. 옴 저항·전하전달·확산 거동은 고전적 EIS와 일치하며 Kramers–Kronig 잔차는 대부분 구간에서 5 % 이하. 온도 및 SOC 시리즈는 dE/dt ≤ 3 mV 기준으로 무인 자동 실행.</span>
+        <span class="L" lang="vi">Bản ghi 20 phút ở 0,1 Hz đạt tới 0,89 mHz, thu toàn phổ trong khoảng 24 phút thay vì hơn 1,5 giờ. Các đặc trưng ohmic, chuyển điện tích và khuếch tán trùng khớp EIS cổ điển, sai số Kramers–Kronig dưới 5 % trên phần lớn dải. Chuỗi đo theo nhiệt độ và SOC chạy tự động, kích hoạt theo tiêu chí dE/dt ≤ 3 mV.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">PRBS</span>
+        <span class="tag">Morse wavelet</span>
+        <span class="tag">Python / SCPI</span>
+        <span class="tag">Keysight N6705C</span>
+        <span class="tag">GRC Batteries 2026</span>
+      </div>
+    </article>
+
+    <!-- ---------- 0b. AlN ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Wide-temperature impedance characterization of AlN ceramics</span>
+        <span class="L" lang="ko">AlN 세라믹의 광온도역 임피던스 특성 평가</span>
+        <span class="L" lang="vi">Phân tích trở kháng gốm AlN trên dải nhiệt độ rộng</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">AlN is the heater substrate and electrostatic chuck material in semiconductor CVD equipment, where it should insulate — yet it conducts at process temperature. Industrial disks with two proprietary dopants, here A and B, were measured from 30 to 900 °C over 10 mHz–10 MHz under dry air, 500 ppm H<sub>2</sub>O air, nitrogen and vacuum.</span>
+        <span class="L" lang="ko">AlN은 반도체 CVD 장비의 히터 기판 및 정전척 소재로, 절연체로 기대되지만 공정 온도에서는 전도성을 보입니다. 두 종류의 도판트(A, B로 표기)를 포함한 산업용 시료를 30–900 °C, 10 mHz–10 MHz 범위에서 건조 공기, 500 ppm H<sub>2</sub>O 공기, 질소, 진공 분위기에서 측정.</span>
+        <span class="L" lang="vi">AlN được dùng làm đế lò gia nhiệt và chuck tĩnh điện trong thiết bị CVD bán dẫn — vốn cần cách điện, nhưng lại dẫn ở nhiệt độ vận hành. Các đĩa gốm công nghiệp chứa hai loại dopant, ở đây gọi là A và B, được đo từ 30 đến 900 °C, dải 10 mHz–10 MHz, trong không khí khô, không khí 500 ppm H<sub>2</sub>O, nitơ và chân không.</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">Reading the shorting path out of a frequency-resolved Arrhenius plot</span>
+          <span class="L" lang="ko">주파수별 Arrhenius 분석으로 단락 경로를 분리하기</span>
+          <span class="L" lang="vi">Tách đường ngắn mạch từ biểu đồ Arrhenius phân giải theo tần số</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. Sample set -->
+          <div class="fig-step">
+            <div class="fig-media">
+            <svg viewBox="0 0 200 92" role="img" aria-label="Two doped AlN disks with sputtered electrodes">
+              <g>
+                <rect x="22" y="34" width="62" height="6" fill="var(--imag)"/>
+                <rect x="22" y="40" width="62" height="16" fill="#E7E2DA" stroke="var(--line)"/>
+                <rect x="22" y="56" width="62" height="6" fill="var(--imag)"/>
+                <line x1="12" y1="37" x2="22" y2="37" stroke="var(--ink-soft)" stroke-width="1.4"/>
+                <line x1="12" y1="59" x2="22" y2="59" stroke="var(--ink-soft)" stroke-width="1.4"/>
+                <text x="53" y="80" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink)" text-anchor="middle">A</text>
+              </g>
+              <g>
+                <rect x="116" y="34" width="62" height="6" fill="var(--imag)"/>
+                <rect x="116" y="40" width="62" height="16" fill="#CFC8BE" stroke="var(--line)"/>
+                <rect x="116" y="56" width="62" height="6" fill="var(--imag)"/>
+                <line x1="106" y1="37" x2="116" y2="37" stroke="var(--ink-soft)" stroke-width="1.4"/>
+                <line x1="106" y1="59" x2="116" y2="59" stroke="var(--ink-soft)" stroke-width="1.4"/>
+                <text x="147" y="80" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink)" text-anchor="middle">B</text>
+              </g>
+              <text x="100" y="20" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-soft)" text-anchor="middle">Ø5 mm disks</text>
+            </svg>
+            </div>
+            <h4>
+              <span class="L" lang="en">Two dopant systems</span>
+              <span class="L" lang="ko">두 가지 도판트 계</span>
+              <span class="L" lang="vi">Hai hệ dopant</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">Ag and sputtered Mo/Au electrodes</span>
+              <span class="L" lang="ko">Ag · 스퍼터 Mo/Au 전극</span>
+              <span class="L" lang="vi">điện cực Ag và Mo/Au phún xạ</span>
+            </span>
+          </div>
+
+          <!-- 2. Atmosphere and temperature -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-aln-humidity.png" alt="Temperature ramp with inlet and outlet humidity recorded through one cycle">
+            </div>
+            <h4>
+              <span class="L" lang="en">Atmosphere &amp; temperature control</span>
+              <span class="L" lang="ko">분위기·온도 제어</span>
+              <span class="L" lang="vi">Kiểm soát khí quyển &amp; nhiệt độ</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">inlet vs outlet H<sub>2</sub>O · 30–900 °C</span>
+              <span class="L" lang="ko">유입·유출 H<sub>2</sub>O · 30–900 °C</span>
+              <span class="L" lang="vi">H<sub>2</sub>O vào–ra · 30–900 °C</span>
+            </span>
+          </div>
+
+          <!-- 3. Impedance mapping -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-aln-admittance.png" alt="Admittance spectra versus frequency, coloured by temperature">
+            </div>
+            <h4>
+              <span class="L" lang="en">Impedance mapping</span>
+              <span class="L" lang="ko">임피던스 매핑</span>
+              <span class="L" lang="vi">Lập bản đồ trở kháng</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">10 mHz–10 MHz · colour = temperature</span>
+              <span class="L" lang="ko">10 mHz–10 MHz · 색 = 온도</span>
+              <span class="L" lang="vi">10 mHz–10 MHz · màu = nhiệt độ</span>
+            </span>
+          </div>
+
+          <!-- 4. Arrhenius (dữ liệu thật) -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-aln-arrhenius.png" alt="Arrhenius plots before and after the shorting behaviour develops">
+            </div>
+            <h4>
+              <span class="L" lang="en">Arrhenius behaviour</span>
+              <span class="L" lang="ko">Arrhenius 거동</span>
+              <span class="L" lang="vi">Hành vi Arrhenius</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">colour = frequency</span>
+              <span class="L" lang="ko">색 = 주파수</span>
+              <span class="L" lang="vi">màu = tần số</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>30–900 °C</b>
+            <span class="cap">
+              <span class="L" lang="en">dry air, 500 ppm H<sub>2</sub>O, nitrogen and vacuum</span>
+              <span class="L" lang="ko">건조 공기, 500 ppm H<sub>2</sub>O, 질소, 진공</span>
+              <span class="L" lang="vi">không khí khô, 500 ppm H<sub>2</sub>O, nitơ và chân không</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>10 mHz – 10 MHz</b>
+            <span class="cap">
+              <span class="L" lang="en">Z, C and Y on the same specimen</span>
+              <span class="L" lang="ko">동일 시료에서 Z, C, Y 동시 분석</span>
+              <span class="L" lang="vi">Z, C và Y trên cùng một mẫu</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>10 <span class="L" lang="en">cycles</span><span class="L" lang="ko">사이클</span><span class="L" lang="vi">chu kỳ</span></b>
+            <span class="cap">
+              <span class="L" lang="en">the shorting survives, and returns months later</span>
+              <span class="L" lang="ko">단락 거동이 지속되고 수개월 뒤 재현</span>
+              <span class="L" lang="vi">ngắn mạch vẫn tồn tại và trở lại sau vài tháng</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>5×10⁻⁴ hPa</b>
+            <span class="cap">
+              <span class="L" lang="en">vacuum stage removes the atmosphere as a variable</span>
+              <span class="L" lang="ko">분위기 변수를 제거하는 진공 스테이지</span>
+              <span class="L" lang="vi">buồng chân không loại bỏ ảnh hưởng khí quyển</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- ba bằng chứng ---- -->
+        <div class="fig-sched">
+          <div class="fig-title" style="margin:0 0 10px">
+            <span class="L" lang="en">Three observations that name it a surface path</span>
+            <span class="L" lang="ko">표면 경로임을 말해주는 세 가지 관찰</span>
+            <span class="L" lang="vi">Ba quan sát cho thấy đây là đường dẫn bề mặt</span>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Impedance shifts between runs, capacitance spectra do not</span>
+                <span class="L" lang="ko">임피던스는 측정마다 변하지만 커패시턴스는 그대로</span>
+                <span class="L" lang="vi">Trở kháng đổi giữa các lần đo, phổ điện dung thì không</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">parallel path</span>
+                <span class="L" lang="ko">병렬 경로</span>
+                <span class="L" lang="vi">đường song song</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Only the low-frequency Arrhenius branches move</span>
+                <span class="L" lang="ko">저주파 Arrhenius 거동만 이동</span>
+                <span class="L" lang="vi">Chỉ nhánh Arrhenius tần số thấp dịch chuyển</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">not the bulk</span>
+                <span class="L" lang="ko">벌크 아님</span>
+                <span class="L" lang="vi">không phải bulk</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Outlet humidity stays above the inlet through every cycle</span>
+                <span class="L" lang="ko">모든 사이클에서 유출 습도가 유입 습도보다 높게 유지</span>
+                <span class="L" lang="vi">Độ ẩm đầu ra luôn cao hơn đầu vào qua mọi chu kỳ</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">surface reaction</span>
+                <span class="L" lang="ko">표면 반응</span>
+                <span class="L" lang="vi">phản ứng bề mặt</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">Plotted as log σT against 1000/T with frequency as the colour axis, the response splits in two: high-frequency branches following an activation energy specific to each dopant, and a low-frequency branch common to every sample that runs in parallel with the ceramic — a shorting behaviour driven by surface reaction, not an intrinsic property. It survives about ten thermal cycles and returns months later, so separating it took Mo/Au electrodes in vacuum and real-time inlet–outlet humidity monitoring.</span>
+        <span class="L" lang="ko">log σT를 1000/T에 대해 주파수를 색으로 표현하면 응답이 두 계열로 나뉩니다. 고주파 거동은 도판트별 고유의 활성화 에너지를 따르고, 저주파 거동은 조성과 무관하게 모든 시료에서 나타나며 세라믹과 병렬로 흐릅니다. 재료 본연의 성질이 아니라 표면 반응에 의한 단락 거동입니다. 약 10회의 열 사이클 동안 지속되고 수개월 뒤에도 재현되어, 분리하려면 진공에서의 Mo/Au 전극과 유입·유출 습도 실시간 모니터링이 필요했습니다.</span>
+        <span class="L" lang="vi">Vẽ log σT theo 1000/T với màu là tần số, đáp ứng tách thành hai họ: các nhánh tần số cao đi theo năng lượng hoạt hoá riêng của từng dopant, và một nhánh tần số thấp chung cho mọi mẫu, chạy song song với gốm — là ngắn mạch do phản ứng bề mặt, không phải tính chất nội tại. Nó tồn tại qua khoảng mười chu kỳ nhiệt và trở lại sau vài tháng, nên để tách được cần điện cực Mo/Au trong chân không và giám sát độ ẩm vào–ra theo thời gian thực.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">AlN</span>
+        <span class="tag">semiconductor CVD</span>
+        <span class="tag">30–900 °C</span>
+        <span class="tag">controlled atmosphere</span>
+        <span class="tag">Arrhenius mapping</span>
+        <span class="tag">Samsung Electronics</span>
+        <span class="tag">GCIM 2023</span>
+        <span class="locked">
+          <span class="L" lang="en">industrial data restricted</span>
+          <span class="L" lang="ko">산업 데이터 비공개</span>
+          <span class="L" lang="vi">dữ liệu công nghiệp hạn chế</span>
+        </span>
+      </div>
+    </article>
+
+    <!-- ---------- 1. NVP / LVP ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Mixed ionic–electronic transport in battery electrode materials</span>
+        <span class="L" lang="ko">배터리 전극 소재의 혼합 이온–전자 전도</span>
+        <span class="L" lang="vi">Vận chuyển ion–điện tử hỗn hợp trong vật liệu điện cực pin</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Na<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> and Li<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> synthesised by solid-state reaction and packed as bulk pellets in symmetrical coin cells. Each electrode configuration blocks a different carrier, so the electronic, total and ionic response come from one and the same pellet across the α, β, β′ and γ phase transitions.</span>
+        <span class="L" lang="ko">Na<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub>와 Li<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub>를 고상반응으로 합성하여 벌크 펠릿 형태로 대칭 코인셀에 구성. 전극 구성마다 차단되는 캐리어가 달라, 동일한 펠릿에서 전자·총·이온 응답을 각각 분리해 α, β, β′, γ 상전이 구간에서 관찰.</span>
+        <span class="L" lang="vi">Na<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> và Li<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> tổng hợp bằng phản ứng pha rắn, đóng thành pellet trong pin cúc đối xứng. Mỗi cấu hình điện cực chặn một loại hạt tải khác nhau, nên từ cùng một pellet đọc được riêng đáp ứng điện tử, tổng và ion qua các chuyển pha α, β, β′ và γ.</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">One pellet, three electrode configurations, three transport channels</span>
+          <span class="L" lang="ko">하나의 펠릿, 세 가지 전극 구성, 세 가지 수송 채널</span>
+          <span class="L" lang="vi">Một pellet, ba cấu hình điện cực, ba kênh vận chuyển</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. Cell configurations -->
+          <div class="fig-step">
+            <div class="fig-media">
+            <svg viewBox="0 0 200 92" role="img" aria-label="Three symmetrical cell configurations">
+              <g>
+                <rect x="14" y="30" width="46" height="7" fill="var(--imag)"/>
+                <rect x="14" y="37" width="46" height="15" fill="var(--ink)"/>
+                <rect x="14" y="52" width="46" height="7" fill="var(--imag)"/>
+                <text x="37" y="74" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)" text-anchor="middle">Ag</text>
+              </g>
+              <g>
+                <rect x="77" y="30" width="46" height="7" fill="var(--real)"/>
+                <rect x="77" y="37" width="46" height="15" fill="var(--ink)"/>
+                <rect x="77" y="52" width="46" height="7" fill="var(--real)"/>
+                <text x="100" y="74" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)" text-anchor="middle">Na</text>
+              </g>
+              <g>
+                <rect x="140" y="28" width="46" height="6" fill="var(--real)"/>
+                <rect x="140" y="34" width="46" height="5" fill="#E9D5D2"/>
+                <rect x="140" y="39" width="46" height="12" fill="var(--ink)"/>
+                <rect x="140" y="51" width="46" height="5" fill="#E9D5D2"/>
+                <rect x="140" y="56" width="46" height="6" fill="var(--real)"/>
+                <text x="163" y="74" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)" text-anchor="middle">Na⁺</text>
+              </g>
+              <text x="100" y="18" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-soft)" text-anchor="middle">symmetrical coin cells</text>
+            </svg>
+            </div>
+            <h4>
+              <span class="L" lang="en">Selective blocking electrodes</span>
+              <span class="L" lang="ko">선택적 차단 전극</span>
+              <span class="L" lang="vi">Điện cực chặn chọn lọc</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">metal, alkali metal, liquid or PEO electrolyte</span>
+              <span class="L" lang="ko">금속, 알칼리 금속, 액체·PEO 전해질</span>
+              <span class="L" lang="vi">kim loại, kim loại kiềm, điện giải lỏng hoặc PEO</span>
+            </span>
+          </div>
+
+          <!-- 2. DSC -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-nvp-dsc.png" alt="DSC heating and cooling curves showing the alpha, beta, beta-prime and gamma regions">
+            </div>
+            <h4>
+              <span class="L" lang="en">Phase transitions by DSC</span>
+              <span class="L" lang="ko">DSC로 확인한 상전이</span>
+              <span class="L" lang="vi">Chuyển pha xác định bằng DSC</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">heating and cooling, 10 °C/min</span>
+              <span class="L" lang="ko">승온·냉각, 10 °C/min</span>
+              <span class="L" lang="vi">gia nhiệt và làm nguội, 10 °C/phút</span>
+            </span>
+          </div>
+
+          <!-- 3. Transmission-line model -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-nvp-tlm.png" alt="Modified Jamnik-Maier transmission line with ionic and electronic rails">
+            </div>
+            <h4>
+              <span class="L" lang="en">Modified Jamnik–Maier model</span>
+              <span class="L" lang="ko">수정 Jamnik–Maier 모델</span>
+              <span class="L" lang="vi">Mô hình Jamnik–Maier hiệu chỉnh</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">ionic and electronic rails + C<sub>chem</sub></span>
+              <span class="L" lang="ko">이온·전자 경로 + C<sub>chem</sub></span>
+              <span class="L" lang="vi">kênh ion và điện tử + C<sub>chem</sub></span>
+            </span>
+          </div>
+
+          <!-- 4. Partial conductivities -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-nvp-sigma.png" alt="Ohmic, electronic and ionic conductivities against reciprocal temperature across the alpha and beta phases">
+            </div>
+            <h4>
+              <span class="L" lang="en">Partial conductivities vs T</span>
+              <span class="L" lang="ko">부분 전도도의 온도 의존성</span>
+              <span class="L" lang="vi">Độ dẫn thành phần theo T</span>
+            </h4>
+            <span class="sub">σ<sub>ohm</sub> · σ<sub>eon</sub> · σ<sub>ion</sub></span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>α β β′ γ</b>
+            <span class="cap">
+              <span class="L" lang="en">four reversible transitions, all of them visible in transport</span>
+              <span class="L" lang="ko">네 개의 가역 상전이가 모두 수송 거동에 반영</span>
+              <span class="L" lang="vi">bốn chuyển pha thuận nghịch, đều hiện trong vận chuyển</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>0.10 → 0.18 eV</b>
+            <span class="cap">
+              <span class="L" lang="en">ionic activation energy stepping across the α→β boundary</span>
+              <span class="L" lang="ko">α→β 경계에서 변하는 이온 활성화 에너지</span>
+              <span class="L" lang="vi">năng lượng hoạt hoá ion đổi khi qua ranh giới α→β</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>5 <span class="L" lang="en">cell types</span><span class="L" lang="ko">셀 구성</span><span class="L" lang="vi">loại pin</span></b>
+            <span class="cap">
+              <span class="L" lang="en">blocking and reversible electrodes, liquid and polymer electrolytes</span>
+              <span class="L" lang="ko">차단·가역 전극, 액체 및 고분자 전해질</span>
+              <span class="L" lang="vi">điện cực chặn và thuận nghịch, điện giải lỏng và polymer</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>−70 – 300 °C</b>
+            <span class="cap">
+              <span class="L" lang="en">impedance and calorimetry over the same thermal range</span>
+              <span class="L" lang="ko">동일 온도 구간에서의 임피던스·열분석</span>
+              <span class="L" lang="vi">trở kháng và nhiệt lượng trên cùng dải nhiệt độ</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- cấu hình nào tách được gì ---- -->
+        <div class="fig-sched">
+          <div class="fig-title" style="margin:0 0 10px">
+            <span class="L" lang="en">What each configuration isolates</span>
+            <span class="L" lang="ko">각 구성이 분리해내는 성분</span>
+            <span class="L" lang="vi">Mỗi cấu hình tách ra thành phần nào</span>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Ag | NVP | Ag — metal electrodes block the ions</span>
+                <span class="L" lang="ko">Ag | NVP | Ag — 금속 전극이 이온을 차단</span>
+                <span class="L" lang="vi">Ag | NVP | Ag — điện cực kim loại chặn ion</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">electronic</span>
+                <span class="L" lang="ko">전자</span>
+                <span class="L" lang="vi">điện tử</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Na | NVP | Na — reversible to both carriers</span>
+                <span class="L" lang="ko">Na | NVP | Na — 두 캐리어 모두에 가역적</span>
+                <span class="L" lang="vi">Na | NVP | Na — thuận nghịch với cả hai hạt tải</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">total</span>
+                <span class="L" lang="ko">총 전도</span>
+                <span class="L" lang="vi">tổng</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Na | Na<sup>+</sup> | NVP | Na<sup>+</sup> | Na — the electrolyte blocks the electrons</span>
+                <span class="L" lang="ko">Na | Na<sup>+</sup> | NVP | Na<sup>+</sup> | Na — 전해질이 전자를 차단</span>
+                <span class="L" lang="vi">Na | Na<sup>+</sup> | NVP | Na<sup>+</sup> | Na — điện giải chặn điện tử</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">ionic</span>
+                <span class="L" lang="ko">이온</span>
+                <span class="L" lang="vi">ion</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Li | PEO | LVP | PEO | Li — the same logic carried to the Li system</span>
+                <span class="L" lang="ko">Li | PEO | LVP | PEO | Li — 동일한 원리를 Li 계에 적용</span>
+                <span class="L" lang="vi">Li | PEO | LVP | PEO | Li — cùng nguyên lý áp dụng cho hệ Li</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">polymer</span>
+                <span class="L" lang="ko">고분자</span>
+                <span class="L" lang="vi">polymer</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">Fitted with a modified Jamnik–Maier transmission line, the ionic conductivity, chemical capacitance and interfacial capacitance all step at the temperatures DSC marks as transitions — and lag them on cooling — while the ohmic resistance and dielectric capacitance stay temperature independent. The ionic activation energy moves from about 0.10 eV in α to 0.18 eV in β, so the phase transitions are measurable in transport, not only in calorimetry.</span>
+        <span class="L" lang="ko">수정 Jamnik–Maier 전송선 모델로 피팅한 결과, 이온 전도도·화학 커패시턴스·계면 커패시턴스는 DSC가 가리키는 상전이 온도에서 함께 변화하며 냉각 시에는 지연되어 나타납니다. 반면 옴 저항과 유전 커패시턴스는 온도에 무관합니다. 이온 활성화 에너지는 α상 약 0.10 eV에서 β상 0.18 eV로 이동하여, 상전이가 열분석뿐 아니라 수송 거동에서도 측정 가능함을 보여줍니다.</span>
+        <span class="L" lang="vi">Khi khớp bằng mô hình transmission-line Jamnik–Maier hiệu chỉnh, độ dẫn ion, điện dung hoá học và điện dung giao diện đều thay đổi đúng tại các nhiệt độ mà DSC ghi nhận chuyển pha — và trễ lại khi làm nguội — trong khi điện trở ohmic và điện dung điện môi không phụ thuộc nhiệt độ. Năng lượng hoạt hoá ion dịch từ khoảng 0,10 eV ở pha α lên 0,18 eV ở pha β, cho thấy chuyển pha đo được ngay trong hành vi vận chuyển chứ không chỉ trong nhiệt lượng.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">NVP</span>
+        <span class="tag">LVP</span>
+        <span class="tag">Na-ion</span>
+        <span class="tag">DSC</span>
+        <span class="tag">Jamnik–Maier TLM</span>
+        <span class="tag">ICC8 2021</span>
+      </div>
+    </article>
+
+    <!-- ---------- 2. Polymer / liquid electrolytes ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Nernst–Planck modelling of polymer and liquid electrolytes</span>
+        <span class="L" lang="ko">고분자·액체 전해질의 Nernst–Planck 모델링</span>
+        <span class="L" lang="vi">Mô hình Nernst–Planck cho chất điện giải polymer và lỏng</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">P(EO)<sub>18</sub>:LiTFSI and 1 M LiPF<sub>6</sub> in EC/DMC, assembled as symmetrical Li|electrolyte|Li coin cells with no separator, glass fibre or Celgard. The lithium transference number is obtained twice — from DC polarisation and from a Nernst–Planck transmission line fitted to the impedance — so the two routes check each other.</span>
+        <span class="L" lang="ko">P(EO)<sub>18</sub>:LiTFSI 및 1 M LiPF<sub>6</sub> in EC/DMC를 분리막 없음·유리섬유·Celgard 세 가지 구성의 대칭 Li|전해질|Li 코인셀로 제작. 리튬 수송률을 DC 분극과 Nernst–Planck 전송선 피팅 두 경로로 각각 산출하여 상호 검증.</span>
+        <span class="L" lang="vi">P(EO)<sub>18</sub>:LiTFSI và 1 M LiPF<sub>6</sub> trong EC/DMC, lắp thành pin cúc đối xứng Li|điện giải|Li với ba cấu hình: không màng ngăn, sợi thuỷ tinh và Celgard. Số vận chuyển lithium được xác định theo hai đường độc lập — phân cực DC và khớp mô hình transmission-line Nernst–Planck — để kiểm chứng lẫn nhau.</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">Two independent routes to the same transference number</span>
+          <span class="L" lang="ko">동일한 수송률에 도달하는 두 가지 독립 경로</span>
+          <span class="L" lang="vi">Hai con đường độc lập dẫn tới cùng một số vận chuyển</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. Setup -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-el-setup.png" alt="Three cell holders multiplexed to three impedance analysers">
+            </div>
+            <h4>
+              <span class="L" lang="en">Multi-channel cell bench</span>
+              <span class="L" lang="ko">다채널 셀 측정 시스템</span>
+              <span class="L" lang="vi">Hệ đo đa kênh</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">3 holders · SP-200 + VSP-300 · Keithley 2750</span>
+              <span class="L" lang="ko">홀더 3개 · SP-200 + VSP-300 · Keithley 2750</span>
+              <span class="L" lang="vi">3 giá mẫu · SP-200 + VSP-300 · Keithley 2750</span>
+            </span>
+          </div>
+
+          <!-- 2. DC polarisation -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-el-dcpol.png" alt="Polarisation current decaying to a steady state, with the fitted curve and the corresponding impedance spectrum">
+            </div>
+            <h4>
+              <span class="L" lang="en">DC polarisation</span>
+              <span class="L" lang="ko">DC 분극</span>
+              <span class="L" lang="vi">Phân cực DC</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">10 mV step · steady-state current</span>
+              <span class="L" lang="ko">10 mV 인가 · 정상상태 전류</span>
+              <span class="L" lang="vi">bậc 10 mV · dòng ổn định</span>
+            </span>
+          </div>
+
+          <!-- 3. Model hierarchy -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-el-models.png" alt="Four transmission-line variants built up one element at a time">
+            </div>
+            <h4>
+              <span class="L" lang="en">Model built element by element</span>
+              <span class="L" lang="ko">요소를 하나씩 더한 모델</span>
+              <span class="L" lang="vi">Mô hình xây theo từng phần tử</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">built up: Nernst–Planck → R<sub>ct</sub> → C<sub>dl</sub> → CPE</span>
+              <span class="L" lang="ko">단계적 확장: Nernst–Planck → R<sub>ct</sub> → C<sub>dl</sub> → CPE</span>
+              <span class="L" lang="vi">xây dần: Nernst–Planck → R<sub>ct</sub> → C<sub>dl</sub> → CPE</span>
+            </span>
+          </div>
+
+          <!-- 4. Fit -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-el-nyquist.png" alt="Measured spectrum overlaid with the successive model variants, each element showing in its own frequency window">
+            </div>
+            <h4>
+              <span class="L" lang="en">Where each element responds</span>
+              <span class="L" lang="ko">각 요소가 응답하는 주파수 대역</span>
+              <span class="L" lang="vi">Mỗi phần tử đáp ứng ở dải nào</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">1 MHz – 1 mHz · Python + MEISP</span>
+              <span class="L" lang="ko">1 MHz – 1 mHz · Python + MEISP</span>
+              <span class="L" lang="vi">1 MHz – 1 mHz · Python + MEISP</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>t<sub>+</sub> ≈ 0.1</b>
+            <span class="cap">
+              <span class="L" lang="en">for P(EO)<sub>18</sub>LiTFSI, flat across the whole temperature range</span>
+              <span class="L" lang="ko">P(EO)<sub>18</sub>LiTFSI, 전 온도 구간에서 일정</span>
+              <span class="L" lang="vi">với P(EO)<sub>18</sub>LiTFSI, không đổi trên toàn dải nhiệt độ</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>2 <span class="L" lang="en">routes</span><span class="L" lang="ko">경로</span><span class="L" lang="vi">hướng</span></b>
+            <span class="cap">
+              <span class="L" lang="en">DC polarisation and impedance fitting, in agreement with each other</span>
+              <span class="L" lang="ko">DC 분극과 임피던스 피팅 결과가 서로 일치</span>
+              <span class="L" lang="vi">phân cực DC và khớp trở kháng, cho kết quả trùng nhau</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>1 MHz – 1 mHz</b>
+            <span class="cap">
+              <span class="L" lang="en">impedance from 10 to 65 °C, DC polarisation from 30 to 90 °C</span>
+              <span class="L" lang="ko">임피던스 10–65 °C, DC 분극 30–90 °C</span>
+              <span class="L" lang="vi">trở kháng 10–65 °C, phân cực DC 30–90 °C</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>3 <span class="L" lang="en">separators</span><span class="L" lang="ko">분리막 구성</span><span class="L" lang="vi">cấu hình màng</span></b>
+            <span class="cap">
+              <span class="L" lang="en">none, glass fibre and Celgard, each measured on heating and cooling</span>
+              <span class="L" lang="ko">없음·유리섬유·Celgard, 승온 및 냉각 모두 측정</span>
+              <span class="L" lang="vi">không màng, sợi thuỷ tinh và Celgard, đo cả khi tăng và giảm nhiệt</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- điều mà mô hình nói ra ---- -->
+        <div class="fig-sched">
+          <div class="fig-title" style="margin:0 0 10px">
+            <span class="L" lang="en">What the model build-up teaches</span>
+            <span class="L" lang="ko">모델을 단계적으로 쌓으며 배우는 것</span>
+            <span class="L" lang="vi">Xây mô hình theo từng bước để học được gì</span>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Adding one element at a time shows where each of them acts: R<sub>ct</sub> and C<sub>dl</sub> shape the high-frequency arc, C<sub>chem</sub> the low-frequency branch</span>
+                <span class="L" lang="ko">요소를 하나씩 추가하면 각 요소가 작용하는 대역이 드러남: R<sub>ct</sub>·C<sub>dl</sub>은 고주파 반원, C<sub>chem</sub>은 저주파 영역</span>
+                <span class="L" lang="vi">Thêm từng phần tử một cho thấy mỗi phần tử tác động ở đâu: R<sub>ct</sub> và C<sub>dl</sub> định hình cung tần cao, C<sub>chem</sub> chi phối vùng tần thấp</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">element ↔ frequency</span>
+                <span class="L" lang="ko">요소 ↔ 주파수</span>
+                <span class="L" lang="vi">phần tử ↔ tần số</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">R<sub>ct</sub> falls as PEO softens, while C<sub>chem</sub>, C<sub>0</sub>, dC and Q<sub>W</sub> stay temperature independent</span>
+                <span class="L" lang="ko">PEO가 연화되며 R<sub>ct</sub>는 감소, C<sub>chem</sub>·C<sub>0</sub>·dC·Q<sub>W</sub>는 온도에 무관</span>
+                <span class="L" lang="vi">R<sub>ct</sub> giảm khi PEO mềm ra, còn C<sub>chem</sub>, C<sub>0</sub>, dC và Q<sub>W</sub> không phụ thuộc nhiệt độ</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">contact, not transport</span>
+                <span class="L" lang="ko">접촉의 문제</span>
+                <span class="L" lang="vi">do tiếp xúc</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">The DC limit is out of reach for PEO but accessible for the liquid cells, so each system needs its own route to t<sub>+</sub></span>
+                <span class="L" lang="ko">PEO는 DC 극한에 도달할 수 없고 액체 셀은 가능하여, 계마다 다른 경로가 필요</span>
+                <span class="L" lang="vi">Giới hạn DC không đạt được với PEO nhưng đạt được với pin điện giải lỏng, nên mỗi hệ cần một hướng riêng</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">why two routes</span>
+                <span class="L" lang="ko">두 경로의 이유</span>
+                <span class="L" lang="vi">lý do hai hướng</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">Building the transmission line one element at a time maps each circuit element to the frequency window where it actually acts, which is what makes the fitted parameters interpretable. The transference numbers from impedance fitting then agree with those from DC polarisation and with published values for the same polymer, and both methods give the same Arrhenius behaviour. For P(EO)<sub>18</sub>LiTFSI t<sub>+</sub> is temperature independent, whereas the liquid cells drift with temperature and with the separator — the separator is part of the measurement, not a passive spacer.</span>
+        <span class="L" lang="ko">전송선 모델을 요소 단위로 쌓아 올리면 각 회로 요소가 실제로 작용하는 주파수 대역을 파악할 수 있고, 그 결과 피팅 파라미터를 해석할 수 있게 됩니다. 이렇게 얻은 수송률은 DC 분극 결과 및 동일 고분자에 대한 문헌 값과 일치하며, 두 방법의 Arrhenius 거동도 동일합니다. P(EO)<sub>18</sub>LiTFSI의 t<sub>+</sub>는 온도에 무관한 반면, 액체 전해질 셀은 온도와 분리막 종류에 따라 변합니다. 분리막은 단순한 스페이서가 아니라 측정의 일부입니다.</span>
+        <span class="L" lang="vi">Xây mô hình transmission-line theo từng phần tử cho phép xác định mỗi phần tử mạch thực sự đáp ứng ở dải tần nào, nhờ đó các tham số khớp được mới có thể diễn giải. Số vận chuyển thu từ khớp trở kháng sau đó trùng với kết quả phân cực DC và với giá trị đã công bố cho cùng loại polymer, và cả hai phương pháp cho cùng hành vi Arrhenius. Với P(EO)<sub>18</sub>LiTFSI, t<sub>+</sub> không phụ thuộc nhiệt độ, trong khi các pin điện giải lỏng thay đổi theo nhiệt độ và theo màng ngăn — màng ngăn là một phần của phép đo, không phải miếng đệm thụ động.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">PEO:LiTFSI</span>
+        <span class="tag">LiPF<sub>6</sub> EC/DMC</span>
+        <span class="tag">transference number</span>
+        <span class="tag">Nernst–Planck TLM</span>
+        <span class="tag">Python / MEISP</span>
+        <span class="tag">GRC Batteries 2024</span>
+      </div>
+    </article>
+
+    <!-- ---------- 3. Solid electrolytes ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Beyond the brick-layer model: polycrystalline solid electrolytes</span>
+        <span class="L" lang="ko">Brick-layer 모델을 넘어서: 다결정 고체 전해질</span>
+        <span class="L" lang="vi">Vượt qua mô hình brick-layer: chất điện giải rắn đa tinh thể</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub> pellets from the same powder but different sintering routes, so that phase and microstructure differ while the chemistry does not. Phases were checked by XRD and microstructure by SEM before impedance was measured as one continuous temperature series from −73 to 130 °C over 1 Hz–1 MHz.</span>
+        <span class="L" lang="ko">동일한 분말을 서로 다른 소결 조건으로 처리하여 조성은 같고 상과 미세구조만 다른 Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub> 펠릿을 준비. XRD로 상을, SEM으로 미세구조를 확인한 뒤 −73~130 °C, 1 Hz–1 MHz 구간에서 하나의 연속 온도 계열로 임피던스를 측정.</span>
+        <span class="L" lang="vi">Các pellet Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub> từ cùng một loại bột nhưng thiêu kết theo các chế độ khác nhau, nên pha và vi cấu trúc khác nhau còn thành phần thì không. Pha được kiểm tra bằng XRD, vi cấu trúc bằng SEM, trước khi đo trở kháng thành một chuỗi nhiệt độ liên tục từ −73 đến 130 °C, dải 1 Hz–1 MHz.</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">One model, the whole temperature series, every representation</span>
+          <span class="L" lang="ko">하나의 모델로 전체 온도 계열과 모든 표현을 동시에</span>
+          <span class="L" lang="vi">Một mô hình, toàn chuỗi nhiệt độ, mọi cách biểu diễn</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. XRD -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-llzo-xrd.png" alt="XRD patterns of the LLZ samples with simulated peak positions below each pattern">
+            </div>
+            <h4>
+              <span class="L" lang="en">Phase analysis by XRD</span>
+              <span class="L" lang="ko">XRD 상 분석</span>
+              <span class="L" lang="vi">Phân tích pha bằng XRD</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">measured patterns vs simulated peaks</span>
+              <span class="L" lang="ko">측정 패턴과 계산 피크 비교</span>
+              <span class="L" lang="vi">phổ đo so với vị trí đỉnh mô phỏng</span>
+            </span>
+          </div>
+
+          <!-- 2. SEM -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-llzo-sem.png" alt="SEM images and elemental maps of the sintered pellets at several magnifications">
+            </div>
+            <h4>
+              <span class="L" lang="en">Microstructure by SEM and EDS</span>
+              <span class="L" lang="ko">SEM·EDS 미세구조 분석</span>
+              <span class="L" lang="vi">Vi cấu trúc bằng SEM và EDS</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">polished, etched and fractured surfaces</span>
+              <span class="L" lang="ko">연마·식각·파단면 관찰</span>
+              <span class="L" lang="vi">mặt đánh bóng, ăn mòn và mặt gãy</span>
+            </span>
+          </div>
+
+          <!-- 3. Brick-layer check -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-llzo-bricklayer.png" alt="Arrhenius plot of the resistances returned by the brick-layer model">
+            </div>
+            <h4>
+              <span class="L" lang="en">Brick-layer resistances vs T</span>
+              <span class="L" lang="ko">Brick-layer 저항의 온도 의존성</span>
+              <span class="L" lang="vi">Điện trở brick-layer theo T</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">each spectrum fitted on its own</span>
+              <span class="L" lang="ko">스펙트럼별 개별 피팅 결과</span>
+              <span class="L" lang="vi">khớp riêng từng phổ</span>
+            </span>
+          </div>
+
+          <!-- 4. Representations -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-llzo-representations.png" alt="The same dataset shown as conductivity, capacitance, admittance and complex-plane representations">
+            </div>
+            <h4>
+              <span class="L" lang="en">CPE-free impedance modelling over temperature range</span>
+              <span class="L" lang="ko">온도 전 구간에 대한 CPE 없는 임피던스 모델링</span>
+              <span class="L" lang="vi">Mô hình trở kháng không dùng CPE trên toàn dải nhiệt độ</span>
+            </h4>
+            <span class="sub">σT · Z · Y · C</span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>3 <span class="L" lang="en">pellets</span><span class="L" lang="ko">펠릿</span><span class="L" lang="vi">pellet</span></b>
+            <span class="cap">
+              <span class="L" lang="en">same powder, different sintering routes, checked by XRD and SEM</span>
+              <span class="L" lang="ko">동일 분말·상이한 소결 조건, XRD와 SEM으로 확인</span>
+              <span class="L" lang="vi">cùng bột, khác chế độ thiêu kết, kiểm tra bằng XRD và SEM</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>200 – 400 K</b>
+            <span class="cap">
+              <span class="L" lang="en">one continuous series, reproduced in every representation</span>
+              <span class="L" lang="ko">하나의 연속 계열을 모든 표현에서 재현</span>
+              <span class="L" lang="vi">một chuỗi liên tục, tái hiện trên mọi biểu diễn</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>
+              <span class="L" lang="en">no CPEs</span>
+              <span class="L" lang="ko">CPE 없이</span>
+              <span class="L" lang="vi">không CPE</span>
+            </b>
+            <span class="cap">
+              <span class="L" lang="en">every parameter carries a physical meaning and an activation energy</span>
+              <span class="L" lang="ko">모든 파라미터가 물리적 의미와 활성화 에너지를 가짐</span>
+              <span class="L" lang="vi">mọi tham số đều mang ý nghĩa vật lý và một năng lượng hoạt hoá</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>~12 <span class="L" lang="en">parameters</span><span class="L" lang="ko">파라미터</span><span class="L" lang="vi">tham số</span></b>
+            <span class="cap">
+              <span class="L" lang="en">describing hundreds of spectra at once</span>
+              <span class="L" lang="ko">수백 개의 스펙트럼을 한 번에 기술</span>
+              <span class="L" lang="vi">mô tả cùng lúc hàng trăm phổ</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- vì sao phải fit cả chuỗi ---- -->
+        <div class="fig-sched">
+          <div class="fig-title" style="margin:0 0 10px">
+            <span class="L" lang="en">Why the whole series has to be fitted at once</span>
+            <span class="L" lang="ko">전체 계열을 동시에 피팅해야 하는 이유</span>
+            <span class="L" lang="vi">Vì sao phải khớp cả chuỗi cùng lúc</span>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">A spectrum fitted on its own can be matched by many parameter sets</span>
+                <span class="L" lang="ko">개별 스펙트럼은 여러 파라미터 조합으로 맞출 수 있음</span>
+                <span class="L" lang="vi">Một phổ khớp riêng lẻ có thể được khớp bởi nhiều bộ tham số</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">ambiguous alone</span>
+                <span class="L" lang="ko">단독으론 모호</span>
+                <span class="L" lang="vi">riêng lẻ thì mơ hồ</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Tying every parameter to an activation energy makes the temperature dependence part of the model</span>
+                <span class="L" lang="ko">모든 파라미터를 활성화 에너지에 연결하면 온도 의존성이 모델의 일부가 됨</span>
+                <span class="L" lang="vi">Gắn mọi tham số với một năng lượng hoạt hoá đưa sự phụ thuộc nhiệt độ vào chính mô hình</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">series constrains</span>
+                <span class="L" lang="ko">계열이 구속</span>
+                <span class="L" lang="vi">chuỗi ràng buộc</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">The same parameters must hold in impedance, admittance and capacitance simultaneously</span>
+                <span class="L" lang="ko">동일한 파라미터가 임피던스·어드미턴스·커패시턴스에서 동시에 성립해야 함</span>
+                <span class="L" lang="vi">Cùng bộ tham số phải đúng đồng thời trên trở kháng, dẫn nạp và điện dung</span>
+              </span>
+              <span class="t">
+                <span class="L" lang="en">no hidden freedom</span>
+                <span class="L" lang="ko">여유 없음</span>
+                <span class="L" lang="vi">không còn tự do ẩn</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">A single physics-based model — dispersive bulk and grain-boundary responses plus a transmission line with interfacial impedance for the electrodes — describes the entire temperature series at once, with every parameter tied to an activation energy. It has to hold in the impedance, admittance and capacitance representations simultaneously, which is what keeps the fitted quantities physically meaningful where conventional CPE fitting returns numbers without physico-chemical content. Implemented as a Python least-squares pipeline.</span>
+        <span class="L" lang="ko">분산성 벌크·입계 응답과 계면 임피던스를 갖는 전송선 모델을 결합한 단일 물리 기반 모델로 전체 온도 계열을 동시에 기술했으며, 모든 파라미터는 활성화 에너지에 연결됩니다. 이 모델은 임피던스·어드미턴스·커패시턴스 표현에서 동시에 성립해야 하므로, 물리화학적 의미 없는 수치만 주는 기존 CPE 피팅과 달리 파라미터가 물리적 의미를 유지합니다. Python 최소자승 파이프라인으로 구현.</span>
+        <span class="L" lang="vi">Một mô hình dựa trên vật lý duy nhất — đáp ứng tán sắc của bulk và biên hạt, cùng transmission-line có trở kháng giao diện cho điện cực — mô tả đồng thời toàn bộ chuỗi nhiệt độ, mọi tham số đều gắn với một năng lượng hoạt hoá. Mô hình phải đúng cùng lúc trên biểu diễn trở kháng, dẫn nạp và điện dung, nhờ đó các đại lượng khớp được giữ nguyên ý nghĩa vật lý, khác với fit CPE thông thường vốn chỉ cho ra con số không mang nội dung hoá lý. Triển khai bằng pipeline least-squares trong Python.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">LLZO</span>
+        <span class="tag">garnet</span>
+        <span class="tag">physics-based modelling</span>
+        <span class="tag">temperature series</span>
+        <span class="tag">Python</span>
+        <span class="tag">SSI-24</span>
+        <span class="tag">GRS Batteries 2024</span>
+      </div>
+    </article>
+
+    <!-- ---------- 4. Human body impedance ---------- -->
+    <article class="card">
+      <h3>
+        <span class="L" lang="en">Human body segment impedance: artefacts and modelling</span>
+        <span class="L" lang="ko">인체 부위별 임피던스: 아티팩트와 모델링</span>
+        <span class="L" lang="vi">Trở kháng theo vùng cơ thể người: nhiễu đo và mô hình</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Over three years, more than 5,000 EIS datasets from 500+ IRB-approved participants, measured in ten segmental configurations from 1 MHz to 1 Hz with a BioLogic SP-200 and a Keithley 2700/7708 multiplexer under LabVIEW control, alongside InBody 720 body composition and Styku 3D body scans.</span>
+        <span class="L" lang="ko">3년에 걸쳐 IRB 승인 참가자 500명 이상으로부터 5,000건 이상의 EIS 데이터를 수집. BioLogic SP-200과 Keithley 2700/7708 멀티플렉서를 LabVIEW로 제어하여 10가지 부위 구성을 1 MHz–1 Hz에서 측정하고, InBody 720 체성분 및 Styku 3D 스캔 데이터와 함께 분석.</span>
+        <span class="L" lang="vi">Trong ba năm, hơn 5.000 bộ dữ liệu EIS từ hơn 500 người tham gia được IRB phê duyệt, đo ở mười cấu hình vùng cơ thể từ 1 MHz đến 1 Hz bằng BioLogic SP-200 và multiplexer Keithley 2700/7708 điều khiển qua LabVIEW, kèm dữ liệu thành phần cơ thể InBody 720 và quét 3D Styku.</span>
+      </p>
+
+      <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+      <figure class="fig">
+        <figcaption class="fig-title">
+          <span class="L" lang="en">Removing the instrument from the measurement before modelling the body</span>
+          <span class="L" lang="ko">인체를 모델링하기 전에 측정 장비의 기여를 제거하기</span>
+          <span class="L" lang="vi">Loại bỏ phần đóng góp của thiết bị trước khi mô hình hoá cơ thể</span>
+        </figcaption>
+
+        <div class="fig-flow">
+
+          <!-- 1. Segmental modes -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-bia-modes.png" alt="Ten segmental measurement configurations for arms, legs, trunk and half-body">
+            </div>
+            <h4>
+              <span class="L" lang="en">Ten segmental modes</span>
+              <span class="L" lang="ko">10가지 부위 측정 모드</span>
+              <span class="L" lang="vi">Mười chế độ đo theo vùng</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">arms, legs, trunk, half body · 61 points</span>
+              <span class="L" lang="ko">팔·다리·몸통·상하좌우 · 61개 주파수</span>
+              <span class="L" lang="vi">tay, chân, thân, nửa người · 61 điểm</span>
+            </span>
+          </div>
+
+          <!-- 2. Stray capacitance -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-bia-stray.png" alt="Inverse of the multiplexer stray capacitance against the segmental resistance being measured">
+            </div>
+            <h4>
+              <span class="L" lang="en">Stray capacitance of the chain</span>
+              <span class="L" lang="ko">측정 회로의 부유 정전용량</span>
+              <span class="L" lang="vi">Điện dung ký sinh của hệ đo</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">1/C<sub>k</sub> vs segmental resistance</span>
+              <span class="L" lang="ko">1/C<sub>k</sub> 대 부위 저항</span>
+              <span class="L" lang="vi">1/C<sub>k</sub> theo điện trở vùng</span>
+            </span>
+          </div>
+
+          <!-- 3. Transmission line model -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-bia-tlm.png" alt="Transmission line with a porous tissue section joined to a liquid electrolyte section">
+            </div>
+            <h4>
+              <span class="L" lang="en">Tissue as porous solid + vessel</span>
+              <span class="L" lang="ko">다공성 조직 + 체액 통로 모델</span>
+              <span class="L" lang="vi">Mô xốp + mạch dịch</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">Nernst–Planck transmission line, Python</span>
+              <span class="L" lang="ko">Nernst–Planck 전송선 모델, Python</span>
+              <span class="L" lang="vi">transmission line Nernst–Planck, Python</span>
+            </span>
+          </div>
+
+          <!-- 4. Segmental simulation -->
+          <div class="fig-step">
+            <div class="fig-media">
+              <img src="figures/fig-bia-simulation.png" alt="Measured and simulated impedance, capacitance and admittance for arm, leg and trunk">
+            </div>
+            <h4>
+              <span class="L" lang="en">Body segment impedance simulation</span>
+              <span class="L" lang="ko">부위별 인체 임피던스 시뮬레이션</span>
+              <span class="L" lang="vi">Mô phỏng trở kháng theo vùng cơ thể</span>
+            </h4>
+            <span class="sub">
+              <span class="L" lang="en">arm, leg and trunk with the model at left</span>
+              <span class="L" lang="ko">왼쪽 모델로 계산한 팔·다리·몸통</span>
+              <span class="L" lang="vi">tay, chân và thân với mô hình bên trái</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- con số chính ---- -->
+        <div class="fig-stats">
+          <div class="fig-stat">
+            <b>5,000+ <span class="L" lang="en">datasets</span><span class="L" lang="ko">데이터</span><span class="L" lang="vi">bộ dữ liệu</span></b>
+            <span class="cap">
+              <span class="L" lang="en">from 500+ participants over three years, IRB approved</span>
+              <span class="L" lang="ko">3년간 500명 이상 참가자, IRB 승인</span>
+              <span class="L" lang="vi">từ hơn 500 người trong ba năm, được IRB phê duyệt</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>3 <span class="L" lang="en">instruments</span><span class="L" lang="ko">측정 방식</span><span class="L" lang="vi">hệ đo</span></b>
+            <span class="cap">
+              <span class="L" lang="en">impedance, body composition and 3D geometry on the same person</span>
+              <span class="L" lang="ko">동일 참가자에 대한 임피던스·체성분·3D 형상 측정</span>
+              <span class="L" lang="vi">trở kháng, thành phần cơ thể và hình học 3D trên cùng một người</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>8 pF – 0.3 nF</b>
+            <span class="cap">
+              <span class="L" lang="en">stray capacitances of the measurement chain, quantified one by one</span>
+              <span class="L" lang="ko">측정 회로의 부유 정전용량을 개별적으로 정량화</span>
+              <span class="L" lang="vi">điện dung ký sinh của hệ đo, định lượng từng thành phần</span>
+            </span>
+          </div>
+          <div class="fig-stat">
+            <b>Z &middot; C &middot; Y</b>
+            <span class="cap">
+              <span class="L" lang="en">every segment reproduced in all three representations by one model</span>
+              <span class="L" lang="ko">하나의 모델로 모든 부위를 세 가지 표현에서 동시에 재현</span>
+              <span class="L" lang="vi">mọi vùng đều tái hiện trên cả ba biểu diễn bằng một mô hình</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- ---- ba nguồn dữ liệu ---- -->
+        <div class="fig-sched">
+          <div class="fig-title" style="margin:0 0 10px">
+            <span class="L" lang="en">Three measurement streams on every participant</span>
+            <span class="L" lang="ko">참가자마다 수집한 세 가지 측정 데이터</span>
+            <span class="L" lang="vi">Ba luồng dữ liệu trên mỗi người tham gia</span>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Multi-frequency EIS on ten body segments, switched by a multiplexer under LabVIEW</span>
+                <span class="L" lang="ko">LabVIEW로 멀티플렉서를 제어하여 10개 부위의 다주파수 EIS 측정</span>
+                <span class="L" lang="vi">EIS đa tần trên mười vùng cơ thể, chuyển kênh bằng multiplexer điều khiển qua LabVIEW</span>
+              </span>
+              <span class="t">SP-200</span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">Body composition indices and segmental impedance at a few fixed frequencies</span>
+                <span class="L" lang="ko">체성분 지표와 몇 개의 고정 주파수에서의 부위별 임피던스</span>
+                <span class="L" lang="vi">Chỉ số thành phần cơ thể và trở kháng theo vùng tại vài tần số cố định</span>
+              </span>
+              <span class="t">InBody 720</span>
+            </div>
+          </div>
+
+          <div class="fig-row">
+            <div class="lab">
+              <span>
+                <span class="L" lang="en">3D body scans turned into segment geometry, so the shape factor is measured rather than assumed</span>
+                <span class="L" lang="ko">3D 스캔으로부터 부위 형상을 산출하여, 형상 인자를 가정이 아닌 측정값으로 사용</span>
+                <span class="L" lang="vi">Quét 3D chuyển thành hình học từng vùng, nên hệ số hình dạng được đo chứ không phải giả định</span>
+              </span>
+              <span class="t">Styku + COMSOL</span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+      <div class="result">
+        <strong>
+          <span class="L" lang="en">Conclusion.</span>
+          <span class="L" lang="ko">결론.</span>
+          <span class="L" lang="vi">Kết luận.</span>
+        </strong>
+        <span class="L" lang="en">The measurement chain has stray capacitances of its own, and the multiplexer contribution scales inversely with the segment resistance being measured — so the artefact changes from one body segment to the next and had to be quantified and built into the simulation before any body response could be modelled. Once corrected, R<sub>total</sub>/R<sub>ext</sub> settles near 2/3 for arm and leg and 1/2 for trunk, close to the anion transference number of NaCl solution, which we interpret through an inhomogeneously distributed Nernst–Planck body fluid — tissue as a porous solid in series with a liquid vessel, simulated in Python.</span>
+        <span class="L" lang="ko">측정 회로 자체가 부유 정전용량을 가지며, 멀티플렉서의 기여는 측정 대상 부위 저항에 반비례합니다. 따라서 아티팩트가 부위마다 달라지므로, 인체 응답을 모델링하기 전에 이를 정량화하여 시뮬레이션에 포함해야 했습니다. 보정 후 R<sub>total</sub>/R<sub>ext</sub>는 팔·다리에서 약 2/3, 몸통에서 약 1/2로 수렴하며, 이는 NaCl 용액의 음이온 수송률에 가깝습니다. 다공성 조직과 체액 통로가 직렬로 연결된 불균일 분포 Nernst–Planck 체액 모델로 해석하고 Python으로 시뮬레이션했습니다.</span>
+        <span class="L" lang="vi">Bản thân chuỗi đo có điện dung ký sinh riêng, và phần đóng góp của multiplexer tỉ lệ nghịch với điện trở vùng đang đo — nghĩa là nhiễu thay đổi theo từng vùng cơ thể, phải định lượng và đưa vào mô phỏng trước khi mô hình hoá đáp ứng của cơ thể. Sau hiệu chỉnh, R<sub>total</sub>/R<sub>ext</sub> hội tụ quanh 2/3 với tay và chân, 1/2 với thân, gần với số vận chuyển anion của dung dịch NaCl — được diễn giải bằng mô hình dịch cơ thể Nernst–Planck phân bố không đồng nhất: mô như chất rắn xốp nối tiếp với mạch dịch, mô phỏng bằng Python.</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag">bioimpedance</span>
+        <span class="tag">stray capacitance</span>
+        <span class="tag">Nernst–Planck TLM</span>
+        <span class="tag">LabVIEW / Python</span>
+        <span class="tag">3D scan + COMSOL</span>
+        <span class="tag">5,000+ datasets</span>
+        <span class="tag">AEIS 2024</span>
+        <span class="locked">
+          <span class="L" lang="en">participant data not shared</span>
+          <span class="L" lang="ko">참가자 데이터 비공개</span>
+          <span class="L" lang="vi">dữ liệu người tham gia không chia sẻ</span>
+        </span>
+      </div>
+    </article>
+
+
+
+    <!-- ===== HẾT KHỐI DỰ ÁN ===== -->
+  </div>
+</section>
+
+<!-- ============ KINH NGHIỆM & HỌC VẤN ============ -->
+<section id="cv">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Background</span>
+      <span class="L" lang="ko">이력</span>
+      <span class="L" lang="vi">Quá trình</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Experience &amp; education</span>
+      <span class="L" lang="ko">경력 및 학력</span>
+      <span class="L" lang="vi">Kinh nghiệm &amp; học vấn</span>
+    </h2>
+
+    <div class="subhead">
+      <span class="L" lang="en">Experience</span>
+      <span class="L" lang="ko">경력</span>
+      <span class="L" lang="vi">Kinh nghiệm</span>
+    </div>
+
+    <div class="entry">
+      <div class="when">2024.09 — <span class="L" lang="en">present</span><span class="L" lang="ko">현재</span><span class="L" lang="vi">nay</span></div>
+      <h3>
+        <span class="L" lang="en">Postdoctoral Researcher, Chonnam National University</span>
+        <span class="L" lang="ko">박사후연구원, 전남대학교</span>
+        <span class="L" lang="vi">Nghiên cứu viên sau tiến sĩ, Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Impedance methodology and automated measurement platforms for ionics materials; industry programmes with Samsung Electronics and Samsung SDI. Seven funded research programmes delivered.</span>
+        <span class="L" lang="ko">이온 전도 재료를 위한 임피던스 방법론 및 자동 측정 플랫폼 개발. 삼성전자·삼성SDI 산학 과제 포함, 총 7개 연구 과제 수행.</span>
+        <span class="L" lang="vi">Phương pháp luận trở kháng và hệ đo tự động cho vật liệu ion; các đề tài hợp tác với Samsung Electronics và Samsung SDI. Đã hoàn thành 7 đề tài nghiên cứu.</span>
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="when">2016.03 — 2024.08</div>
+      <h3>
+        <span class="L" lang="en">Graduate Researcher (M.Sc., Ph.D.), Chonnam National University</span>
+        <span class="L" lang="ko">대학원 연구원 (석사·박사), 전남대학교</span>
+        <span class="L" lang="vi">Nghiên cứu sinh (Thạc sĩ, Tiến sĩ), Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Impedance modelling of solid electrolytes and mixed conductors; bioimpedance study with 500+ IRB-approved participants and over 5,000 EIS datasets; ceramic processing and structural characterization (XRD, SEM/FE-SEM, TEM).</span>
+        <span class="L" lang="ko">고체 전해질 및 혼합 전도체의 임피던스 모델링, IRB 승인 참가자 500명 이상·EIS 데이터 5,000건 이상의 생체 임피던스 연구, 세라믹 공정 및 구조 분석(XRD, SEM/FE-SEM, TEM).</span>
+        <span class="L" lang="vi">Mô hình trở kháng chất điện giải rắn và dẫn hỗn hợp; nghiên cứu bioimpedance với hơn 500 người tham gia được IRB phê duyệt và trên 5.000 bộ dữ liệu EIS; chế tạo gốm và phân tích cấu trúc (XRD, SEM/FE-SEM, TEM).</span>
+      </p>
+    </div>
+
+    <div class="subhead">
+      <span class="L" lang="en">Education</span>
+      <span class="L" lang="ko">학력</span>
+      <span class="L" lang="vi">Học vấn</span>
+    </div>
+
+    <div class="entry">
+      <div class="when">2018 — 2024</div>
+      <h3>
+        <span class="L" lang="en">Ph.D., Materials Science &amp; Engineering — Chonnam National University</span>
+        <span class="L" lang="ko">공학박사, 신소재공학 — 전남대학교</span>
+        <span class="L" lang="vi">Tiến sĩ, Khoa học &amp; Kỹ thuật Vật liệu — Đại học Quốc gia Chonnam</span>
+      </h3>
+      <p>
+        <span class="L" lang="en">Physics-based impedance modelling of mixed conductors, electrolytes and body segments.</span>
+        <span class="L" lang="ko">혼합 전도체·전해질·인체 조직의 물리 기반 임피던스 모델링.</span>
+        <span class="L" lang="vi">Mô hình trở kháng dựa trên vật lý cho dẫn hỗn hợp, chất điện giải và mô cơ thể.</span>
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="when">2016 — 2018</div>
+      <h3>
+        <span class="L" lang="en">M.Sc., Materials Science &amp; Engineering — Chonnam National University</span>
+        <span class="L" lang="ko">공학석사, 신소재공학 — 전남대학교</span>
+        <span class="L" lang="vi">Thạc sĩ, Khoa học &amp; Kỹ thuật Vật liệu — Đại học Quốc gia Chonnam</span>
+      </h3>
+    </div>
+
+    <div class="entry">
+      <div class="when">2011 — 2015</div>
+      <h3>
+        <span class="L" lang="en">B.Sc., Materials Science — University of Science, Ho Chi Minh City</span>
+        <span class="L" lang="ko">이학사, 재료과학 — 호치민시 자연과학대학교</span>
+        <span class="L" lang="vi">Cử nhân, Khoa học Vật liệu — Trường Đại học Khoa học Tự nhiên, TP. Hồ Chí Minh</span>
+      </h3>
+    </div>
+
+    <div class="subhead">
+      <span class="L" lang="en">Awards &amp; languages</span>
+      <span class="L" lang="ko">수상 및 언어</span>
+      <span class="L" lang="vi">Giải thưởng &amp; ngôn ngữ</span>
+    </div>
+
+    <div class="entry">
+      <p style="margin-top:0">
+        <span class="L" lang="en">Best Poster Prize, 4th AEIS, Japan (2024) &middot; BK21 Graduate Research Fellowship, NRF Korea (2018–2022) &middot; Vietnamese (native), English (professional), Korean (TOPIK 4)</span>
+        <span class="L" lang="ko">제4회 AEIS 우수 포스터상, 일본 (2024) &middot; BK21 대학원 연구장학금, 한국연구재단 (2018–2022) &middot; 베트남어(모국어), 영어(업무 가능), 한국어(TOPIK 4급)</span>
+        <span class="L" lang="vi">Giải Poster xuất sắc, AEIS lần thứ 4, Nhật Bản (2024) &middot; Học bổng nghiên cứu BK21, NRF Hàn Quốc (2018–2022) &middot; Tiếng Việt (bản ngữ), tiếng Anh (thành thạo), tiếng Hàn (TOPIK 4)</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÔNG BỐ ============ -->
+<section id="pubs">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="L" lang="en">Publications</span>
+      <span class="L" lang="ko">논문</span>
+      <span class="L" lang="vi">Công bố</span>
+    </div>
+    <h2>
+      <span class="L" lang="en">Peer-reviewed work</span>
+      <span class="L" lang="ko">학술 논문</span>
+      <span class="L" lang="vi">Bài báo khoa học</span>
+    </h2>
+
+    <div class="subhead">
+      <span class="L" lang="en">Journal articles</span>
+      <span class="L" lang="ko">학술지 논문</span>
+      <span class="L" lang="vi">Bài báo tạp chí</span>
+    </div>
+
+    <ol class="pubs">
+      <li>
+        N. Ecebaş, A. Ayuningsih, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, W. Jo.
+        Processing and optimization of textured (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–BaTiO<sub>3</sub>–SrTiO<sub>3</sub> incipient piezoelectric ceramics by templated grain growth using NaNbO<sub>3</sub> templates.
+        <em>Journal of the Korean Ceramic Society, 2026.</em>
+      </li>
+      <li>
+        N. Ecebaş, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, YB. Han, W. Jo.
+        The effect of sintering atmosphere and temperature on densification, grain growth behaviour and electrical properties of 0.685(Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–0.065BaTiO<sub>3</sub>–0.25SrTiO<sub>3</sub> ceramics.
+        <em>Crystals 16(2), 143, 2026.</em>
+      </li>
+      <li>
+        A. Ayuningsih, N. Ecebaş, <b>T. T. H. Tran</b>, J. G. Fisher, JS. Lee, WJ. Choi, W. Jo.
+        Texturing (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–KNbO<sub>3</sub>–SrTiO<sub>3</sub> electrostrictive ceramics by templated grain growth using (Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub> platelets.
+        <em>Inorganics 13(12), 387, 2025.</em>
+      </li>
+      <li>
+        I. Abbas, <b>H. T. Tran</b>, T. T. N. Tran, T. L. Pham, EC. Shin, CW. Park, SB. Yu, O. J. Lee, AG. Nguyen, D. Jeong, et al.
+        GITT limitations and EIS insights into kinetics of NMC622.
+        <em>Batteries 11(6), 234, 2025.</em>
+      </li>
+      <li>
+        K. Andleeb, T. T. Doan, J. G. Fisher, <b>T. T. H. Tran</b>, JS. Lee, WJ. Choi, W. Jo.
+        Fabrication of textured 0.685(Na<sub>0.5</sub>Bi<sub>0.5</sub>)TiO<sub>3</sub>–0.065BaTiO<sub>3</sub>–0.25SrTiO<sub>3</sub> electrostrictive ceramics by templated grain growth using NaNbO<sub>3</sub> templates and characterization of their electrical properties.
+        <em>Crystals 14(10), 861, 2024.</em>
+      </li>
+      <li>
+        T. T. Doan, J. G. Fisher, JS. Lee, <b>H. T. Tran</b>, J. Gao, J. Mok, J. Lee, A. Benčan, G. Dražić, S. B. Junaid, et al.
+        Growth of KNbO<sub>3</sub> single crystals by the flux method using KBO<sub>2</sub> as a flux.
+        <em>Inorganics 12(6), 151, 2024.</em>
+      </li>
+      <li>
+        P. G. Le, <b>H. T. Tran</b>, JS. Lee, J. G. Fisher, HP. Kim, W. Jo, WJ. Moon.
+        Growth of single crystals in the (Na<sub>1/2</sub>Bi<sub>1/2</sub>)TiO<sub>3</sub>–(Sr<sub>1−x</sub>Ca<sub>x</sub>)TiO<sub>3</sub> system by solid state crystal growth.
+        <em>Journal of Advanced Ceramics 10(5), 973–990, 2021.</em>
+      </li>
+      <li>
+        H. Sun, J. G. Fisher, SH. Moon, <b>H. T. Tran</b>, JS. Lee, HS. Han, HP. Kim, W. Jo.
+        Solid-state growth of lead-free piezoelectric (Na<sub>1/2</sub>Bi<sub>1/2</sub>)TiO<sub>3</sub>–CaTiO<sub>3</sub> single crystals and their characterization.
+        <em>Materials Science and Engineering: B 223, 109–119, 2017.</em>
+      </li>
+    </ol>
+
+    <div class="subhead">
+      <span class="L" lang="en">Conference proceedings</span>
+      <span class="L" lang="ko">학술대회 발표</span>
+      <span class="L" lang="vi">Kỷ yếu hội nghị</span>
+    </div>
+
+    <ol class="pubs">
+      <li>
+        JS. Lee, <b>T. T. H. Tran</b>, CW. Park, T. L. Pham, EC. Shin, K. S. Yun, H. J. Kim, JH. Yu.
+        Physics-based EIS modeling of solid oxide cells: ionic/electronic rails, diffusion–reaction kinetics, and gas transport.
+        <em>ECS Meeting Abstracts, SOFC 2025.</em>
+      </li>
+      <li>
+        <b>T. T. H. Tran</b>, T. L. Pham, J. Kim, EC. Shin, CW. Ahn, DS. Park, N. Shin, J. Kim, JS. Lee.
+        Physics-based impedance modeling of polycrystalline solid electrolytes assisted by data science tools: application to Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub>.
+        <em>Proc. 24th International Conference on Solid State Ionics (SSI-24), 2024.</em>
+      </li>
+    </ol>
+
+    <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">
+      <span class="L" lang="en">Full list on</span>
+      <span class="L" lang="ko">전체 목록은</span>
+      <span class="L" lang="vi">Danh sách đầy đủ trên</span>
+      <a class="inline" href="https://scholar.google.com/citations?user=uDmM0ccAAAAJ&amp;hl=en">Google Scholar</a>.
+    </p>
+  </div>
+</section>
+
+    <!-- ============ BÁO CÁO HỘI NGHỊ ============
+         Sửa danh sách ở file này. Mỗi báo cáo là một <li>.
+         Tên chị để trong <b>...</b>; dòng <em> ghi hội nghị, địa điểm, thời gian
+         và hình thức trình bày (Poster / Oral).
+         Chỗ nào còn "TODO" là chỗ mình không có dữ liệu, chị điền giúp.
+         ========================================================================= -->
+    <section id="talks">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="L" lang="en">Presentations</span>
+          <span class="L" lang="ko">학회 발표</span>
+          <span class="L" lang="vi">Báo cáo hội nghị</span>
+        </div>
+        <h2>
+          <span class="L" lang="en">Conference presentations</span>
+          <span class="L" lang="ko">국내외 학회 발표</span>
+          <span class="L" lang="vi">Trình bày tại hội nghị</span>
+        </h2>
+
+        <p class="lead">
+          <span class="L" lang="en">Most of this work is presented and discussed at conferences before it appears in print. Presenting author in bold.</span>
+          <span class="L" lang="ko">이 연구들은 대부분 논문으로 출판되기 전에 학회에서 발표되고 논의되었습니다. 발표자는 굵게 표시.</span>
+          <span class="L" lang="vi">Phần lớn các nghiên cứu này được trình bày và thảo luận tại hội nghị trước khi công bố trên tạp chí. Người trình bày in đậm.</span>
+        </p>
+
+        <ol class="pubs">
+          <li>
+            <b>T. T. H. Tran</b>, CW. Park, OJ. Lee, SB. Yu, P. Boškoski, JS. Lee.
+            Fast EIS for cylindrical Li-ion cells using PRBS excitation and continuous wavelet transform.
+            <em>Poster &middot; GRC Batteries, Ventura, CA, USA &middot; 15–20 Feb 2026</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, T. L. Pham, L. Tran, N. T. Tran, JK. Kim, JS. Lee.
+            Advanced numerical simulation and modeling for human body segment impedance analysis.
+            <em>Oral &middot; 4th AEIS, Japan &middot; 2024 &middot; Best Poster Prize</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, A. G. Nguyen, I. Abbas, CJ. Park, JS. Lee.
+            Advancing battery electrolyte studies: unravelling the nuances with Nernst–Planck, porous electrode, and transmission line models.
+            <em>Poster &middot; GRC Batteries, Ventura, CA, USA &middot; 25 Feb – 1 Mar 2024</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, T. L. Pham, JH. Kim, JS. Lee.
+            Ultimate description of the impedance of polycrystalline electrolytes: application to LLZ and sodium beta alumina.
+            <em>Poster &middot; GRS Batteries, Ventura, CA, USA &middot; 24–25 Feb 2024</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, T. L. Pham, J. Kim, EC. Shin, CW. Ahn, DS. Park, N. Shin, J. Kim, JS. Lee.
+            Physics-based impedance modeling of polycrystalline solid electrolytes assisted by data science tools: application to Li<sub>7</sub>La<sub>3</sub>Zr<sub>2</sub>O<sub>12</sub>.
+            <em>TODO Poster / Oral &middot; 24th International Conference on Solid State Ionics (SSI-24) &middot; 2024</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, N. Ecebaş, R. Rupaya, T. L. Pham, J. G. Fisher, JS. Lee.
+            Wide-temperature and frequency impedance characterization of AlN ceramics.
+            <em>Poster &middot; Global Conference on Innovation in Materials (GCIM), Jeju, Korea &middot; 6–9 Jun 2023</em>
+          </li>
+          <li>
+            <b>T. T. H. Tran</b>, P. Didwal, T. L. Pham, SH. Park, JK. Kim, CJ. Park, JS. Lee.
+            Characterization of model electrochemical cells with mixed conducting Na<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> and Li<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>3</sub> cathode materials.
+            <em>TODO Poster / Oral &middot; 8th International Congress on Ceramics (ICC8), Busan, Korea &middot; 25–30 Apr 2021</em>
+          </li>
+
+          <!-- ---------- MẪU ĐỂ THÊM BÁO CÁO MỚI ----------
+          <li>
+            <b>T. T. H. Tran</b>, TODO đồng tác giả.
+            TODO tiêu đề báo cáo.
+            <em>TODO Poster / Oral &middot; TODO hội nghị, địa điểm &middot; TODO thời gian</em>
+          </li>
+          ------------------------------------------------ -->
+        </ol>
+      </div>
+    </section>
+
+
+<footer>
+  <div class="wrap">
+    Tran Thi Huyen Tran &middot; Chonnam National University, Gwangju &middot;
+    <a class="inline" href="mailto:trantran@jnu.ac.kr">trantran@jnu.ac.kr</a> &middot;
+    <a class="inline" href="mailto:huyentran150193@gmail.com">huyentran150193@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+/* Đổi ngôn ngữ: đặt data-lang cho thẻ <html>, CSS lo phần còn lại. */
+document.querySelectorAll('.langbar button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var lang = btn.dataset.set;
+    document.documentElement.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.langbar button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
+  });
+});
+</script>
+
+</body>
+</html>

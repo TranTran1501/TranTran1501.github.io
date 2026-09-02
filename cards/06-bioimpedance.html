@@ -1,0 +1,198 @@
+<!-- ---------- 4. Human body impedance ---------- -->
+<article class="card">
+  <h3>
+    <span class="L" lang="en">Human body segment impedance: artefacts and modelling</span>
+    <span class="L" lang="ko">인체 부위별 임피던스: 아티팩트와 모델링</span>
+    <span class="L" lang="vi">Trở kháng theo vùng cơ thể người: nhiễu đo và mô hình</span>
+  </h3>
+  <p>
+    <span class="L" lang="en">Over three years, more than 5,000 EIS datasets from 500+ IRB-approved participants, measured in ten segmental configurations from 1 MHz to 1 Hz with a BioLogic SP-200 and a Keithley 2700/7708 multiplexer under LabVIEW control, alongside InBody 720 body composition and Styku 3D body scans.</span>
+    <span class="L" lang="ko">3년에 걸쳐 IRB 승인 참가자 500명 이상으로부터 5,000건 이상의 EIS 데이터를 수집. BioLogic SP-200과 Keithley 2700/7708 멀티플렉서를 LabVIEW로 제어하여 10가지 부위 구성을 1 MHz–1 Hz에서 측정하고, InBody 720 체성분 및 Styku 3D 스캔 데이터와 함께 분석.</span>
+    <span class="L" lang="vi">Trong ba năm, hơn 5.000 bộ dữ liệu EIS từ hơn 500 người tham gia được IRB phê duyệt, đo ở mười cấu hình vùng cơ thể từ 1 MHz đến 1 Hz bằng BioLogic SP-200 và multiplexer Keithley 2700/7708 điều khiển qua LabVIEW, kèm dữ liệu thành phần cơ thể InBody 720 và quét 3D Styku.</span>
+  </p>
+
+  <!-- ===================== HÌNH TỔNG HỢP ===================== -->
+  <figure class="fig">
+    <figcaption class="fig-title">
+      <span class="L" lang="en">Removing the instrument from the measurement before modelling the body</span>
+      <span class="L" lang="ko">인체를 모델링하기 전에 측정 장비의 기여를 제거하기</span>
+      <span class="L" lang="vi">Loại bỏ phần đóng góp của thiết bị trước khi mô hình hoá cơ thể</span>
+    </figcaption>
+
+    <div class="fig-flow">
+
+      <!-- 1. Segmental modes -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-bia-modes.png" alt="Ten segmental measurement configurations for arms, legs, trunk and half-body">
+        </div>
+        <h4>
+          <span class="L" lang="en">Ten segmental modes</span>
+          <span class="L" lang="ko">10가지 부위 측정 모드</span>
+          <span class="L" lang="vi">Mười chế độ đo theo vùng</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">arms, legs, trunk, half body · 61 points</span>
+          <span class="L" lang="ko">팔·다리·몸통·상하좌우 · 61개 주파수</span>
+          <span class="L" lang="vi">tay, chân, thân, nửa người · 61 điểm</span>
+        </span>
+      </div>
+
+      <!-- 2. Stray capacitance -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-bia-stray.png" alt="Inverse of the multiplexer stray capacitance against the segmental resistance being measured">
+        </div>
+        <h4>
+          <span class="L" lang="en">Stray capacitance of the chain</span>
+          <span class="L" lang="ko">측정 회로의 부유 정전용량</span>
+          <span class="L" lang="vi">Điện dung ký sinh của hệ đo</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">1/C<sub>k</sub> vs segmental resistance</span>
+          <span class="L" lang="ko">1/C<sub>k</sub> 대 부위 저항</span>
+          <span class="L" lang="vi">1/C<sub>k</sub> theo điện trở vùng</span>
+        </span>
+      </div>
+
+      <!-- 3. Transmission line model -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-bia-tlm.png" alt="Transmission line with a porous tissue section joined to a liquid electrolyte section">
+        </div>
+        <h4>
+          <span class="L" lang="en">Tissue as porous solid + vessel</span>
+          <span class="L" lang="ko">다공성 조직 + 체액 통로 모델</span>
+          <span class="L" lang="vi">Mô xốp + mạch dịch</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">Nernst–Planck transmission line, Python</span>
+          <span class="L" lang="ko">Nernst–Planck 전송선 모델, Python</span>
+          <span class="L" lang="vi">transmission line Nernst–Planck, Python</span>
+        </span>
+      </div>
+
+      <!-- 4. Segmental simulation -->
+      <div class="fig-step">
+        <div class="fig-media">
+          <img src="figures/fig-bia-simulation.png" alt="Measured and simulated impedance, capacitance and admittance for arm, leg and trunk">
+        </div>
+        <h4>
+          <span class="L" lang="en">Body segment impedance simulation</span>
+          <span class="L" lang="ko">부위별 인체 임피던스 시뮬레이션</span>
+          <span class="L" lang="vi">Mô phỏng trở kháng theo vùng cơ thể</span>
+        </h4>
+        <span class="sub">
+          <span class="L" lang="en">arm, leg and trunk with the model at left</span>
+          <span class="L" lang="ko">왼쪽 모델로 계산한 팔·다리·몸통</span>
+          <span class="L" lang="vi">tay, chân và thân với mô hình bên trái</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- con số chính ---- -->
+    <div class="fig-stats">
+      <div class="fig-stat">
+        <b>5,000+ <span class="L" lang="en">datasets</span><span class="L" lang="ko">데이터</span><span class="L" lang="vi">bộ dữ liệu</span></b>
+        <span class="cap">
+          <span class="L" lang="en">from 500+ participants over three years, IRB approved</span>
+          <span class="L" lang="ko">3년간 500명 이상 참가자, IRB 승인</span>
+          <span class="L" lang="vi">từ hơn 500 người trong ba năm, được IRB phê duyệt</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>3 <span class="L" lang="en">instruments</span><span class="L" lang="ko">측정 방식</span><span class="L" lang="vi">hệ đo</span></b>
+        <span class="cap">
+          <span class="L" lang="en">impedance, body composition and 3D geometry on the same person</span>
+          <span class="L" lang="ko">동일 참가자에 대한 임피던스·체성분·3D 형상 측정</span>
+          <span class="L" lang="vi">trở kháng, thành phần cơ thể và hình học 3D trên cùng một người</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>8 pF – 0.3 nF</b>
+        <span class="cap">
+          <span class="L" lang="en">stray capacitances of the measurement chain, quantified one by one</span>
+          <span class="L" lang="ko">측정 회로의 부유 정전용량을 개별적으로 정량화</span>
+          <span class="L" lang="vi">điện dung ký sinh của hệ đo, định lượng từng thành phần</span>
+        </span>
+      </div>
+      <div class="fig-stat">
+        <b>Z &middot; C &middot; Y</b>
+        <span class="cap">
+          <span class="L" lang="en">every segment reproduced in all three representations by one model</span>
+          <span class="L" lang="ko">하나의 모델로 모든 부위를 세 가지 표현에서 동시에 재현</span>
+          <span class="L" lang="vi">mọi vùng đều tái hiện trên cả ba biểu diễn bằng một mô hình</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ---- ba nguồn dữ liệu ---- -->
+    <div class="fig-sched">
+      <div class="fig-title" style="margin:0 0 10px">
+        <span class="L" lang="en">Three measurement streams on every participant</span>
+        <span class="L" lang="ko">참가자마다 수집한 세 가지 측정 데이터</span>
+        <span class="L" lang="vi">Ba luồng dữ liệu trên mỗi người tham gia</span>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">Multi-frequency EIS on ten body segments, switched by a multiplexer under LabVIEW</span>
+            <span class="L" lang="ko">LabVIEW로 멀티플렉서를 제어하여 10개 부위의 다주파수 EIS 측정</span>
+            <span class="L" lang="vi">EIS đa tần trên mười vùng cơ thể, chuyển kênh bằng multiplexer điều khiển qua LabVIEW</span>
+          </span>
+          <span class="t">SP-200</span>
+        </div>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">Body composition indices and segmental impedance at a few fixed frequencies</span>
+            <span class="L" lang="ko">체성분 지표와 몇 개의 고정 주파수에서의 부위별 임피던스</span>
+            <span class="L" lang="vi">Chỉ số thành phần cơ thể và trở kháng theo vùng tại vài tần số cố định</span>
+          </span>
+          <span class="t">InBody 720</span>
+        </div>
+      </div>
+
+      <div class="fig-row">
+        <div class="lab">
+          <span>
+            <span class="L" lang="en">3D body scans turned into segment geometry, so the shape factor is measured rather than assumed</span>
+            <span class="L" lang="ko">3D 스캔으로부터 부위 형상을 산출하여, 형상 인자를 가정이 아닌 측정값으로 사용</span>
+            <span class="L" lang="vi">Quét 3D chuyển thành hình học từng vùng, nên hệ số hình dạng được đo chứ không phải giả định</span>
+          </span>
+          <span class="t">Styku + COMSOL</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <!-- =================== HẾT HÌNH TỔNG HỢP =================== -->
+
+  <div class="result">
+    <strong>
+      <span class="L" lang="en">Conclusion.</span>
+      <span class="L" lang="ko">결론.</span>
+      <span class="L" lang="vi">Kết luận.</span>
+    </strong>
+    <span class="L" lang="en">The measurement chain has stray capacitances of its own, and the multiplexer contribution scales inversely with the segment resistance being measured — so the artefact changes from one body segment to the next and had to be quantified and built into the simulation before any body response could be modelled. Once corrected, R<sub>total</sub>/R<sub>ext</sub> settles near 2/3 for arm and leg and 1/2 for trunk, close to the anion transference number of NaCl solution, which we interpret through an inhomogeneously distributed Nernst–Planck body fluid — tissue as a porous solid in series with a liquid vessel, simulated in Python.</span>
+    <span class="L" lang="ko">측정 회로 자체가 부유 정전용량을 가지며, 멀티플렉서의 기여는 측정 대상 부위 저항에 반비례합니다. 따라서 아티팩트가 부위마다 달라지므로, 인체 응답을 모델링하기 전에 이를 정량화하여 시뮬레이션에 포함해야 했습니다. 보정 후 R<sub>total</sub>/R<sub>ext</sub>는 팔·다리에서 약 2/3, 몸통에서 약 1/2로 수렴하며, 이는 NaCl 용액의 음이온 수송률에 가깝습니다. 다공성 조직과 체액 통로가 직렬로 연결된 불균일 분포 Nernst–Planck 체액 모델로 해석하고 Python으로 시뮬레이션했습니다.</span>
+    <span class="L" lang="vi">Bản thân chuỗi đo có điện dung ký sinh riêng, và phần đóng góp của multiplexer tỉ lệ nghịch với điện trở vùng đang đo — nghĩa là nhiễu thay đổi theo từng vùng cơ thể, phải định lượng và đưa vào mô phỏng trước khi mô hình hoá đáp ứng của cơ thể. Sau hiệu chỉnh, R<sub>total</sub>/R<sub>ext</sub> hội tụ quanh 2/3 với tay và chân, 1/2 với thân, gần với số vận chuyển anion của dung dịch NaCl — được diễn giải bằng mô hình dịch cơ thể Nernst–Planck phân bố không đồng nhất: mô như chất rắn xốp nối tiếp với mạch dịch, mô phỏng bằng Python.</span>
+  </div>
+
+  <div class="tags">
+    <span class="tag">bioimpedance</span>
+    <span class="tag">stray capacitance</span>
+    <span class="tag">Nernst–Planck TLM</span>
+    <span class="tag">LabVIEW / Python</span>
+    <span class="tag">3D scan + COMSOL</span>
+    <span class="tag">5,000+ datasets</span>
+    <span class="tag">AEIS 2024</span>
+    <span class="locked">
+      <span class="L" lang="en">participant data not shared</span>
+      <span class="L" lang="ko">참가자 데이터 비공개</span>
+      <span class="L" lang="vi">dữ liệu người tham gia không chia sẻ</span>
+    </span>
+  </div>
+</article>
