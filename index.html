@@ -587,7 +587,7 @@ footer{padding:44px 0 64px;font-family:"IBM Plex Mono",monospace;font-size:13px;
   let failed = false;
   for (const slot of slots) {
     try {
-      const res = await fetch(slot.dataset.src);
+      const res = await fetch(slot.dataset.src + '?v=' + Date.now());
       if (!res.ok) throw new Error(res.status);
       slot.outerHTML = await res.text();
     } catch (e) {
